@@ -11,5 +11,7 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
-    = render 'layouts/navbar'
-    #page_content.container == yield
+    = render 'shared/navbar'
+    #page_content.container
+      = render 'shared/flash_messages'
+      == yield

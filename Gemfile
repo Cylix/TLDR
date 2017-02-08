@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# Authentication
+gem 'devise'
+
 # HTML templates
 gem 'slim'
 
