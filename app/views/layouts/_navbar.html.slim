@@ -1,0 +1,13 @@
+nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
+  .container
+    button.navbar-toggler.navbar-toggler-right type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+      span.navbar-toggler-icon
+
+    = link_to 'TL;DR', '#', class: 'navbar-brand'
+
+    .collapse.navbar-collapse#navbarSupportedContent
+      ul.navbar-nav.mr-auto
+        li.nav-item.active
+          = link_to 'Home', root_path, class: 'nav-link'
+        li.nav-item
+          = link_to 'Link', '#', class: 'nav-link'
