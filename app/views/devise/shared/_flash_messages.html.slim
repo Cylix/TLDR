@@ -1,0 +1,8 @@
+- if has_model_error?
+  .alert.alert-danger role="alert"
+    button.close type="button" data-dismiss="alert" aria-label="Close"
+      span aria-hidden="true" &times;
+    strong Oops
+    ul
+      - model_errors.each do |error|
+          li = error

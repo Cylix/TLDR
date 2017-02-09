@@ -1,4 +1,11 @@
 - if notice
-  p.notice = notice
+  .alert.alert-info role="alert"
+    button.close type="button" data-dismiss="alert" aria-label="Close"
+      span aria-hidden="true" &times;
+    = notice
+
 - if alert
-  p.alert = alert
+  .alert.alert-warning role="alert"
+    button.close type="button" data-dismiss="alert" aria-label="Close"
+      span aria-hidden="true" &times;
+    = alert

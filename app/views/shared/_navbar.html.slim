@@ -11,3 +11,12 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
           = link_to 'Home', root_path, class: 'nav-link'
         li.nav-item
           = link_to 'Link', '#', class: 'nav-link'
+
+        - if user_signed_in?
+          li.nav-item.dropdown
+            = link_to current_user.to_s, '#', class: 'nav-link dropdown-toggle', id: 'navbarDropdownMenuLink', 'data-toggle' => 'dropdown', 'aria-haspopup' => true, 'aria-expanded' => false
+            .dropdown-menu aria-labelledby='navbarDropdownMenuLink'
+              = link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+        - else
+          = link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
+          = link_to 'Sign In', new_user_session_path, class: 'nav-link'
