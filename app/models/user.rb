@@ -13,8 +13,9 @@ class User < ApplicationRecord
          # :omniauthable
 
   # validations
-  validates :first_name,  presence: true
-  validates :last_name,   presence: true
+  validates :first_name,  length: { minimum: 2 }, presence: true
+  validates :last_name,   length: { minimum: 2 }, presence: true
+  validates :email,       format: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
 
   def to_s
     "#{first_name.capitalize} #{last_name.capitalize}"

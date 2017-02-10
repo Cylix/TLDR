@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170208232421) do
+ActiveRecord::Schema.define(version: 20170210003933) do
+
+  create_table "sources", force: :cascade do |t|
+    t.string   "name",        default: "", null: false
+    t.string   "url",         default: "", null: false
+    t.string   "rss_feed",    default: "", null: false
+    t.text     "description", default: "", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name",             default: "", null: false
