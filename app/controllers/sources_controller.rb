@@ -25,7 +25,7 @@ class SourcesController < ApplicationController
       redirect_to action: :index
     else
       flash[:resource_errors] = @source.errors.full_messages
-      render 'new'
+      render 'new', status: 400
     end
   end
 
@@ -42,7 +42,7 @@ class SourcesController < ApplicationController
       redirect_to action: :index
     else
       flash[:resource_errors] = @source.errors.full_messages
-      render 'edit'
+      render 'edit', status: 400
     end
   end
 
