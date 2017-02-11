@@ -52,7 +52,7 @@ en:
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
     views:
       shared:
-        login_in: "Log in"
+        log_in: "Log in"
         sign_up: "Sign up"
         password_forgotten: "Forgot your password?"
         confirmation_instructions_not_received: "Didn't receive confirmation instructions?"

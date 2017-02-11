@@ -31,11 +31,11 @@ RSpec.feature "Devises", type: :feature do
       end
 
       it 'should redirect to home page, authenticated' do
-        expect(page).to have_link 'Sign Out'
+        expect(page).to have_link 'Sign out'
         expect(page).to have_text user.to_s
 
-        expect(page).not_to have_link 'Sign In'
-        expect(page).not_to have_link 'Sign Up'
+        expect(page).not_to have_link 'Log in'
+        expect(page).not_to have_link 'Sign up'
       end
 
     end
@@ -82,11 +82,11 @@ RSpec.feature "Devises", type: :feature do
       end
 
       it 'should authenticate' do
-        expect(page).to have_link 'Sign Out'
+        expect(page).to have_link 'Sign out'
         expect(page).to have_text user.to_s
 
-        expect(page).not_to have_link 'Sign In'
-        expect(page).not_to have_link 'Sign Up'
+        expect(page).not_to have_link 'Log in'
+        expect(page).not_to have_link 'Sign up'
       end
 
     end
@@ -109,11 +109,11 @@ RSpec.feature "Devises", type: :feature do
         end
 
         it 'should not authenticate' do
-          expect(page).not_to have_link 'Sign Out'
+          expect(page).not_to have_link 'Sign out'
           expect(page).not_to have_text user.to_s
 
-          expect(page).to have_link 'Sign In'
-          expect(page).to have_link 'Sign Up'
+          expect(page).to have_link 'Log in'
+          expect(page).to have_link 'Sign up'
         end
 
         it 'should display an error' do
@@ -138,11 +138,11 @@ RSpec.feature "Devises", type: :feature do
         end
 
         it 'should not authenticate' do
-          expect(page).not_to have_link 'Sign Out'
+          expect(page).not_to have_link 'Sign out'
           expect(page).not_to have_text user.to_s
 
-          expect(page).to have_link 'Sign In'
-          expect(page).to have_link 'Sign Up'
+          expect(page).to have_link 'Log in'
+          expect(page).to have_link 'Sign up'
         end
 
         it 'should display an error' do
@@ -163,13 +163,13 @@ RSpec.feature "Devises", type: :feature do
 
     it 'should disconnect' do
       visit root_path
-      click_link 'Sign Out'
+      click_link 'Sign out'
 
-      expect(page).not_to have_link 'Sign Out'
+      expect(page).not_to have_link 'Sign out'
       expect(page).not_to have_text user.to_s
 
-      expect(page).to have_link 'Sign In'
-      expect(page).to have_link 'Sign Up'
+      expect(page).to have_link 'Log in'
+      expect(page).to have_link 'Sign up'
     end
 
   end

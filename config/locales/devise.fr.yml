@@ -52,7 +52,7 @@ fr:
       unlocked: "Votre compte a été déverrouillé avec succès, vous êtes maintenant connecté."
     views:
       shared:
-        login_in: "Se connecter"
+        log_in: "Se connecter"
         sign_up: "S'inscrire"
         password_forgotten: "Mot de passe oublié?"
         confirmation_instructions_not_received: "Email de confirmation non reçu?"

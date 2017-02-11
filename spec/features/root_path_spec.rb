@@ -16,10 +16,10 @@ RSpec.feature "RootPath", type: :feature do
       it 'should render unauthenticated home page' do
         visit root_path
 
-        expect(page).to have_link 'Sign In'
-        expect(page).to have_link 'Sign Up'
+        expect(page).to have_link 'Log in'
+        expect(page).to have_link 'Sign up'
 
-        expect(page).not_to have_link 'Sign Out'
+        expect(page).not_to have_link 'Sign out'
         expect(page).not_to have_text user.to_s
       end
 
@@ -37,10 +37,10 @@ RSpec.feature "RootPath", type: :feature do
       it 'should render authenticated dashboard' do
         visit root_path
 
-        expect(page).not_to have_link 'Sign In'
-        expect(page).not_to have_link 'Sign Up'
+        expect(page).not_to have_link 'Log in'
+        expect(page).not_to have_link 'Sign up'
 
-        expect(page).to have_link 'Sign Out'
+        expect(page).to have_link 'Sign out'
         expect(page).to have_text user.to_s
       end
 
