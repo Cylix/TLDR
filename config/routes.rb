@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   # Root
   root to: 'static_pages#home'
 
+  # sources
+  resources :sources, except: :show
+
 end

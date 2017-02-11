@@ -1,3 +1,7 @@
 en:
   views:
     shared:
+      navbar:
+        create_source: "Create"
+        list_sources: "All sources"
+        sources: "Content sources"

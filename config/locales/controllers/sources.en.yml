@@ -1,0 +1,11 @@
+en:
+  controllers:
+    sources:
+      create:
+        success: The content source has successfully been created
+      destroy:
+        success: The content source has successfully been removed
+      update:
+        success: The content source has successfully been updated
+      misc:
+        unable_to_find: The requested source does not exist or does not belong to you

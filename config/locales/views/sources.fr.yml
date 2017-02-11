@@ -1,0 +1,15 @@
+fr:
+  views:
+    sources:
+      edit:
+        edit_source: Modifier une source de contenu
+      form:
+        submit: Valider
+      index:
+        actions: Actions
+        confirm_destroy: Êtes-vous sûr de vouloir supprimer cette source?
+        no_description: Aucune description
+        no_source: Aucune source
+        sources: Sources de contenu
+      new:
+        create_new_source: Créer une source de contenu

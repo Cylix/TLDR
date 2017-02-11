@@ -12,6 +12,9 @@ class User < ApplicationRecord
          # :timeoutable,
          # :omniauthable
 
+  # associations
+  has_many :sources, dependent: :destroy
+
   # validations
   validates :first_name,  length: { minimum: 2 }, presence: true
   validates :last_name,   length: { minimum: 2 }, presence: true

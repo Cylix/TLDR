@@ -7,7 +7,7 @@ module ApplicationHelper
 
   # returns model validations errors
   def model_errors
-    resource&.errors&.full_messages    
+    resource&.errors&.full_messages
   end
 
 end

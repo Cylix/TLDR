@@ -1,0 +1,11 @@
+fr:
+  controllers:
+    sources:
+      create:
+        success: La source de contenu a été créée avec succès
+      destroy:
+        success: La source de contenu a été supprimée avec succès
+      update:
+        success: La source de contenu a été modifiée avec succès
+      misc:
+        unable_to_find: La source demandée n'existe pas ou ne vous appartient pas

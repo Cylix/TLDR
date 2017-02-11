@@ -1,5 +1,8 @@
 class Source < ApplicationRecord
 
+  # associations
+  belongs_to :user
+
   # validations
   validates :name,        length: { minimum: 2 }, presence: true
   validates :description, length: { minimum: 0, allow_nil: false, message: I18n.t("activerecord.errors.models.source.description.nil") }

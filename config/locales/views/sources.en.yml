@@ -1,0 +1,15 @@
+en:
+  views:
+    sources:
+      edit:
+        edit_source: Edit a content source
+      form:
+        submit: Submit
+      index:
+        actions: Actions
+        confirm_destroy: Are you sure to be willing to remove this source?
+        no_description: No description
+        no_source: No source
+        sources: Content sources
+      new:
+        create_new_source: Create a content source

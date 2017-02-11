@@ -10,3 +10,8 @@ html, body {
   min-height: 100%;
   padding-top: 75px;
 }
+
+//! textarea design
+textarea.no_resize {
+  resize: none;
+}

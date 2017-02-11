@@ -1,0 +1,28 @@
+- content_for :new_source_link_active, 'active'
+
+h1 = I18n.t("views.sources.index.sources")
+
+- if @sources.any?
+  table.table
+    thead.thead-inverse
+      tr
+        th = I18n.t("activerecord.attributes.source.name")
+        th = I18n.t("activerecord.attributes.source.description")
+        th = I18n.t("activerecord.attributes.source.url")
+        th = I18n.t("activerecord.attributes.source.rss_feed")
+        th = I18n.t("views.sources.index.actions")
+
+    tbody
+      - @sources.each do |source|
+        tr
+          td = source.name
+          td = source.description.blank? ? I18n.t("views.sources.index.no_description") : source.description
+          td = link_to source.url, source.url, target: '_blank'
+          td = link_to source.rss_feed, source.rss_feed, target: '_blank'
+          td
+            = link_to edit_source_path(source) do
+              i.fa.fa-pencil
+            = link_to source, method: :delete, confirm: I18n.t("views.sources.index.confirm_destroy"), style: 'margin-left: 25px;'
+              i.fa.fa-trash
+- else
+  = I18n.t("views.sources.index.no_source")

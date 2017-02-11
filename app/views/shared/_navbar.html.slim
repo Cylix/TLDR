@@ -7,14 +7,30 @@ nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
 
     .collapse.navbar-collapse#navbarSupportedContent
       ul.navbar-nav.mr-auto
-        li.nav-item.active
-          = link_to 'Link', '#', class: 'nav-link'
-
+        //!
+        //! Authenticated Menu
+        //!
         - if user_signed_in?
+          //! sources
+          li.nav-item.dropdown class=(yield :new_source_link_active)
+            = link_to I18n.t("views.shared.navbar.sources"), '#', class: 'nav-link dropdown-toggle', id: 'sources_dropdown', 'data-toggle' => 'dropdown', 'aria-haspopup' => true, 'aria-expanded' => false
+            .dropdown-menu aria-labelledby='sources_dropdown'
+              = link_to I18n.t("views.shared.navbar.list_sources"), sources_path, class: 'dropdown-item'
+              = link_to I18n.t("views.shared.navbar.create_source"), new_source_path, class: 'dropdown-item'
+
+          //! user
           li.nav-item.dropdown
             = link_to current_user.to_s, '#', class: 'nav-link dropdown-toggle', id: 'navbarDropdownMenuLink', 'data-toggle' => 'dropdown', 'aria-haspopup' => true, 'aria-expanded' => false
             .dropdown-menu aria-labelledby='navbarDropdownMenuLink'
               = link_to I18n.t("devise.views.shared.sign_out"), destroy_user_session_path, method: :delete, class: 'dropdown-item'
+
+
+        //!
+        //! Anonymous Menu
+        //!
         - else
-          = link_to I18n.t("devise.views.shared.sign_up"), new_user_registration_path, class: 'nav-link'
-          = link_to I18n.t("devise.views.shared.log_in"), new_user_session_path, class: 'nav-link'
+          //! Devise
+          li.nav-item class=(yield :sign_up_link_active)
+            = link_to I18n.t("devise.views.shared.sign_up"), new_user_registration_path, class: 'nav-link'
+          li.nav-item class=(yield :log_in_link_active)
+            = link_to I18n.t("devise.views.shared.log_in"), new_user_session_path, class: 'nav-link'

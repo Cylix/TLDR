@@ -1,11 +1,2 @@
-- if notice
-  .alert.alert-info role="alert"
-    button.close type="button" data-dismiss="alert" aria-label="Close"
-      span aria-hidden="true" &times;
-    = notice
-
-- if alert
-  .alert.alert-warning role="alert"
-    button.close type="button" data-dismiss="alert" aria-label="Close"
-      span aria-hidden="true" &times;
-    = alert
+- flash.each do |k, v|
+  = render "shared/flash_messages/#{k}", message: v
