@@ -5,13 +5,17 @@ FactoryGirl.define do
     description   'YT Channel feed'
     url           'https://youtube.com/channel/xxx'
     rss_feed      'https://youtube.com/channel/xxx/rss'
+
+    association :user, factory: :user, strategy: :create
   end
 
-  factory :source_edited do
+  factory :source_edited, class: Source do
     name          'YT Channel Edited'
     description   'YT Channel Edited feed'
     url           'https://youtube.com/channel/yyy'
     rss_feed      'https://youtube.com/channel/yyy/rss'
+
+    association :user, factory: :user, strategy: :create
   end
 
 end

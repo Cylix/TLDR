@@ -124,6 +124,33 @@ RSpec.describe Source, type: :model do
 
     end
 
+    describe 'user' do
+
+      describe 'associated' do
+
+        it "can't have an invalid association" do
+          source.user_id += 1
+          expect(source.valid?).to be_falsey
+        end
+
+      end
+
+      describe 'presence' do
+
+        it "can't have no associated user" do
+          source.user = nil
+          expect(source.valid?).to be_falsey
+        end
+
+        it "can't have no associated user id" do
+          source.user_id = nil
+          expect(source.valid?).to be_falsey
+        end
+
+      end
+
+    end
+
   end
 
 end

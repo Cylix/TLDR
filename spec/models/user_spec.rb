@@ -179,4 +179,24 @@ RSpec.describe User, type: :model do
 
   end
 
+  describe 'associations' do
+
+    describe 'sources' do
+
+      describe 'dependent destroy' do
+
+        let!(:source) { create(:source, user: user) }
+
+        it "should destroy the user sources when user is destroy" do
+          expect(Source.count).to eq 1
+          user.destroy!
+          expect(Source.count).to eq 0
+        end
+
+      end
+
+    end
+
+  end
+
 end

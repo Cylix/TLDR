@@ -9,6 +9,9 @@ class Source < ApplicationRecord
   validates :url,         presence: true
   validates :rss_feed,    presence: true
   validate  :validates_urls_format
+  # association validations
+  validates_associated  :user
+  validates_presence_of :user
 
   private
 
