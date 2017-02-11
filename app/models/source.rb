@@ -2,7 +2,7 @@ class Source < ApplicationRecord
 
   # validations
   validates :name,        length: { minimum: 2 }, presence: true
-  validates :description, length: { minimum: 0, allow_nil: false, message: "can't be nil" }
+  validates :description, length: { minimum: 0, allow_nil: false, message: I18n.t("activerecord.errors.models.source.description.nil") }
   validates :url,         presence: true
   validates :rss_feed,    presence: true
   validate  :validates_urls_format
@@ -11,8 +11,8 @@ class Source < ApplicationRecord
 
   # validates url and rss_feed format
   def validates_urls_format
-    errors.add(:url, "has an invalid format") unless valid_url?(url)
-    errors.add(:rss_feed, "has an invalid format") unless valid_url?(rss_feed)
+    errors.add(:url, :invalid) unless valid_url?(url)
+    errors.add(:rss_feed, :invalid) unless valid_url?(rss_feed)
   end
 
   # returns whether the given URL is valid or not

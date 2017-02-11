@@ -1,0 +1,27 @@
+en:
+  activerecord:
+    models:
+      source: Content Source
+    attributes:
+      source:
+        name: "Name"
+        description: "Description"
+        url: "URL"
+        rss_feed: "RSS Feed URL"
+  errors:
+    models:
+      source:
+        attributes:
+          name:
+            blank: "can't be blank"
+            too_short: "is too short (min. %{count})"
+          description:
+            nil: "can't be nil"
+          url:
+            blank: "can't be blank"
+            too_short: "is too short (min. %{count})"
+            invalid: "has an invalid format"
+          rss_feed:
+            blank: "can't be blank"
+            too_short: "is too short (min. %{count})"
+            invalid: "has an invalid format"

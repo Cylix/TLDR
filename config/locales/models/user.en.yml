@@ -1,0 +1,27 @@
+en:
+  activerecord:
+    models:
+      user: User
+    attributes:
+      user:
+        first_name: "First name"
+        last_name: "Last name"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password Confirmation"
+  errors:
+    models:
+      user:
+        attributes:
+          first_name:
+            blank: "can't be blank"
+            too_short: "is too short (min. %{count})"
+          last_name:
+            blank: "can't be blank"
+            too_short: "is too short (min. %{count})"
+          email:
+            invalid: "is invalid"
+          password:
+            blank: "can't be blank"
+            too_short: "is too short (min. %{count})"
+            confirmation: "should match confirmation"
