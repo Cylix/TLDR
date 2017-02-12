@@ -4,6 +4,11 @@ class Source::RSS < Source
   validates :rss_feed, presence: true
   validate :validates_rss_feed_format
 
+  # returns the list of fields specific to this particular type of source
+  def self.type_specific_fields
+    %w[rss_feed]
+  end
+
   private
 
   # validates rss_feed format

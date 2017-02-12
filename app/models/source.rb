@@ -13,6 +13,14 @@ class Source < ApplicationRecord
   validates_presence_of :user
   validates_associated  :user
 
+  # returns hash associating source type to its related fields
+  def self.fields_by_source_type
+    {}.tap do |res|
+      descendants.each { |s| res[s.to_s] = s.type_specific_fields }
+    end
+  end
+
+  # returns whether the current source has an allowed type
   def has_allowed_type?
     Source::descendants.map(&:to_s).include? type
   end

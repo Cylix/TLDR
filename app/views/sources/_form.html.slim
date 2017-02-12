@@ -21,3 +21,6 @@
     = f.text_field :rss_feed, class: 'form-control'
 
   = f.submit I18n.t("views.sources.form.submit"), class: 'btn btn-primary btn-block'
+
+javascript:
+  window.fields_by_source_type = #{Source::fields_by_source_type.to_json.html_safe}
