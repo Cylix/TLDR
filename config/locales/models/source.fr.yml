@@ -11,7 +11,10 @@ fr:
         url: "URL"
   models:
     source:
+      source/facebook: Facebook
       source/rss: RSS
+      source/twitter: Twitter
+      source/youtube: Youtube
   errors:
     models:
       source:

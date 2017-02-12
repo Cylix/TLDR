@@ -15,6 +15,10 @@ class Source < ApplicationRecord
   validates_presence_of :user
   validates_associated  :user
 
+  def has_allowed_type?
+    Source::descendants.map(&:to_s).include? type
+  end
+
   private
 
   # validates url format

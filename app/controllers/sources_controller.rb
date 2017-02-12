@@ -41,7 +41,14 @@ class SourcesController < ApplicationController
   # PUT/PATCH /sources/{id}
   # update an existing content source
   def update
-    if @source.update_attributes sources_params
+    @source.attributes = sources_params
+
+    # if type has changed to another valid type
+    # make source become the new valid source
+    # this is important to run the appropriate validations
+    @source = @source.becomes @source.type.constantize if @source.type_changed? && @source.has_allowed_type?
+
+    if @source.save
       flash[:success] = I18n.t("controllers.sources.update.success")
       redirect_to action: :index
     else
