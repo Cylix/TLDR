@@ -40,6 +40,7 @@ RSpec.feature "Sources", type: :feature do
         expect(page).to have_content source_1.description
         expect(page).to have_content source_1.url
         expect(page).to have_content source_1.rss_feed
+        expect(page).to have_content I18n.t("models.source.#{source_1.type.underscore}")
       end
 
       it 'should not display the other user source' do
@@ -96,6 +97,7 @@ RSpec.feature "Sources", type: :feature do
           expect(page).to have_content source_1.description
           expect(page).to have_content source_1.url
           expect(page).to have_content source_1.rss_feed
+          expect(page).to have_content I18n.t("models.source.#{source_1.type.underscore}")
         end
 
         it 'should create the source' do
@@ -103,10 +105,11 @@ RSpec.feature "Sources", type: :feature do
           expect(user_1.reload.sources.count).to eq 1
 
           created_source = user_1.reload.sources.first
-          expect(created_source.name).to eq source_1.name
+          expect(created_source.name).to        eq source_1.name
           expect(created_source.description).to eq source_1.description
-          expect(created_source.url).to eq source_1.url
-          expect(created_source.rss_feed).to eq source_1.rss_feed
+          expect(created_source.url).to         eq source_1.url
+          expect(created_source.rss_feed).to    eq source_1.rss_feed
+          expect(created_source.type).to        eq source_1.type
         end
 
       end
@@ -203,6 +206,7 @@ RSpec.feature "Sources", type: :feature do
               expect(page).to have_content source_edited.description
               expect(page).to have_content source_edited.url
               expect(page).to have_content source_edited.rss_feed
+              expect(page).to have_content I18n.t("models.source.#{source_edited.type.underscore}")
             end
 
             it 'should have updated the source' do
@@ -210,10 +214,11 @@ RSpec.feature "Sources", type: :feature do
 
               source = user_1.sources.first
 
-              expect(source.name).to eq source_edited.name
+              expect(source.name).to        eq source_edited.name
               expect(source.description).to eq source_edited.description
-              expect(source.url).to eq source_edited.url
-              expect(source.rss_feed).to eq source_edited.rss_feed
+              expect(source.url).to         eq source_edited.url
+              expect(source.rss_feed).to    eq source_edited.rss_feed
+              expect(source.type).to        eq source_edited.type
             end
 
           end
@@ -276,14 +281,16 @@ RSpec.feature "Sources", type: :feature do
             expect(page).to have_content source_edited.description
             expect(page).to have_content source_edited.url
             expect(page).to have_content source_edited.rss_feed
+            expect(page).to have_content I18n.t("models.source.#{source_edited.type.underscore}")
           end
 
           it 'should have updated the source' do
             source_1.reload
-            expect(source_1.name).to eq source_edited.name
+            expect(source_1.name).to        eq source_edited.name
             expect(source_1.description).to eq source_edited.description
-            expect(source_1.url).to eq source_edited.url
-            expect(source_1.rss_feed).to eq source_edited.rss_feed
+            expect(source_1.url).to         eq source_edited.url
+            expect(source_1.rss_feed).to    eq source_edited.rss_feed
+            expect(source_1.type).to        eq source_edited.type
           end
 
         end
@@ -316,10 +323,10 @@ RSpec.feature "Sources", type: :feature do
 
           it 'should not have updated the source' do
             source = user_1.reload.sources.first
-            expect(source.name).not_to eq ''
+            expect(source.name).not_to        eq ''
             expect(source.description).not_to eq ''
-            expect(source.url).not_to eq 'bla bla bla'
-            expect(source.rss_feed).not_to eq 'bla bla bla'
+            expect(source.url).not_to         eq 'bla bla bla'
+            expect(source.rss_feed).not_to    eq 'bla bla bla'
           end
 
         end
@@ -364,6 +371,7 @@ RSpec.feature "Sources", type: :feature do
       expect(page).not_to have_content source_1.description
       expect(page).not_to have_content source_1.url
       expect(page).not_to have_content source_1.rss_feed
+      expect(page).not_to have_content I18n.t("models.source.#{source_1.type.underscore}")
 
       expect(page).to have_content 'No source'
     end

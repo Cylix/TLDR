@@ -106,10 +106,11 @@ RSpec.describe SourcesController, type: :controller do
           }.to change{ user_1.sources.count }.by 1
 
           created_source = user_1.sources.last
-          expect(created_source.name).to eq new_source.name
+          expect(created_source.name).to        eq new_source.name
           expect(created_source.description).to eq new_source.description
-          expect(created_source.url).to eq new_source.url
-          expect(created_source.rss_feed).to eq new_source.rss_feed
+          expect(created_source.url).to         eq new_source.url
+          expect(created_source.rss_feed).to    eq new_source.rss_feed
+          expect(created_source.type).to        eq new_source.type
         end
 
       end
@@ -226,10 +227,11 @@ RSpec.describe SourcesController, type: :controller do
 
               source = user_1.sources.first
 
-              expect(source.name).to eq source_edited.name
-              expect(source.description).to eq source_edited.description
-              expect(source.url).to eq source_edited.url
-              expect(source.rss_feed).to eq source_edited.rss_feed
+              expect(source.name).to          eq source_edited.name
+              expect(source.description).to   eq source_edited.description
+              expect(source.url).to           eq source_edited.url
+              expect(source.rss_feed).to      eq source_edited.rss_feed
+              expect(source.type).to          eq source_edited.type
             end
 
           end
@@ -271,10 +273,11 @@ RSpec.describe SourcesController, type: :controller do
             put :update, params: { id: source_1.id, source: new_source.attributes }
 
             source_1.reload
-            expect(source_1.name).to eq new_source.name
+            expect(source_1.name).to        eq new_source.name
             expect(source_1.description).to eq new_source.description
-            expect(source_1.url).to eq new_source.url
-            expect(source_1.rss_feed).to eq new_source.rss_feed
+            expect(source_1.url).to         eq new_source.url
+            expect(source_1.rss_feed).to    eq new_source.rss_feed
+            expect(source_1.type).to        eq new_source.type
           end
 
         end
