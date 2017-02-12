@@ -6,8 +6,12 @@ fr:
       source:
         name: "Nom"
         description: "Description"
-        url: "URL"
         rss_feed: "URL du flux RSS"
+        type: Type
+        url: "URL"
+  models:
+    source:
+      source/rss: RSS
   errors:
     models:
       source:

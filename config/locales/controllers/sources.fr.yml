@@ -3,6 +3,7 @@ fr:
     sources:
       create:
         success: La source de contenu a été créée avec succès
+        unrecognized_source_type: Le type de source est invalide
       destroy:
         success: La source de contenu a été supprimée avec succès
       update:

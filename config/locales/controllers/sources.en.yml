@@ -3,6 +3,7 @@ en:
     sources:
       create:
         success: The content source has successfully been created
+        unrecognized_source_type: Invalid source type
       destroy:
         success: The content source has successfully been removed
       update:

@@ -6,6 +6,7 @@ h1 = I18n.t("views.sources.index.sources")
   table.table
     thead.thead-inverse
       tr
+        th = I18n.t("activerecord.attributes.source.type")
         th = I18n.t("activerecord.attributes.source.name")
         th = I18n.t("activerecord.attributes.source.description")
         th = I18n.t("activerecord.attributes.source.url")
@@ -15,6 +16,7 @@ h1 = I18n.t("views.sources.index.sources")
     tbody
       - @sources.each do |source|
         tr
+          td = printable_source_type(source.type)
           td = source.name
           td = source.description.blank? ? I18n.t("views.sources.index.no_description") : source.description
           td = link_to source.url, source.url, target: '_blank'
@@ -22,7 +24,7 @@ h1 = I18n.t("views.sources.index.sources")
           td
             = link_to edit_source_path(source), class: 'edit_source_link' do
               i.fa.fa-pencil
-            = link_to source, method: :delete, data: { confirm: I18n.t("views.sources.index.confirm_destroy") }, style: 'margin-left: 25px;', class: 'delete_source_link' do
+            = link_to source_path(source), method: :delete, data: { confirm: I18n.t("views.sources.index.confirm_destroy") }, style: 'margin-left: 25px;', class: 'delete_source_link' do
               i.fa.fa-trash
 - else
   = I18n.t("views.sources.index.no_source")

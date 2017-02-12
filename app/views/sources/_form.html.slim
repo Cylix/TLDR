@@ -1,4 +1,5 @@
-= form_for @source do |f|
+= form_for @source, url: sources_path, as: 'source' do |f|
+
   .form-group
     = f.label :name
     = f.text_field :name, autofocus: true, class: 'form-control'
@@ -6,6 +7,10 @@
   .form-group
     = f.label :description
     = f.text_area :description, rows: 7, class: 'form-control no_resize'
+
+  .form-group
+    = f.label :type
+    = f.select :type, allowed_source_types_for_select, {}, class: 'form-control'
 
   .form-group
     = f.label :url

@@ -6,8 +6,12 @@ en:
       source:
         name: "Name"
         description: "Description"
-        url: "URL"
         rss_feed: "RSS Feed URL"
+        type: Type
+        url: "URL"
+  models:
+    source:
+      source/rss: RSS
   errors:
     models:
       source:

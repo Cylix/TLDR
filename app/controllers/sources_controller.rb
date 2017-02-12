@@ -18,15 +18,19 @@ class SourcesController < ApplicationController
   # POST /sources
   # create a new content source
   def create
-    @source = current_user.sources.new sources_params
+    @source = Source.new sources_params.merge user: current_user
 
     if @source.save
       flash[:success] = I18n.t("controllers.sources.create.success")
       redirect_to action: :index
     else
-      flash[:resource_errors] = @source.errors.full_messages
+      flash.now[:resource_errors] = @source.errors.full_messages
       render 'new', status: 400
     end
+  rescue ActiveRecord::SubclassNotFound
+    @source = Source.new sources_params.merge type: nil
+    flash.now[:error] = I18n.t("controllers.sources.create.unrecognized_source_type")
+    render 'new' and return
   end
 
   # GET /sources/{id}
@@ -41,7 +45,7 @@ class SourcesController < ApplicationController
       flash[:success] = I18n.t("controllers.sources.update.success")
       redirect_to action: :index
     else
-      flash[:resource_errors] = @source.errors.full_messages
+      flash.now[:resource_errors] = @source.errors.full_messages
       render 'edit', status: 400
     end
   end
@@ -58,7 +62,7 @@ class SourcesController < ApplicationController
 
   # allowed params
   def sources_params
-    params.require(:source).permit(:name, :description, :url, :rss_feed)
+    params.require(:source).permit(:name, :description, :type, :url, :rss_feed)
   end
 
   # find the content source for the id paramater
