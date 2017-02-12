@@ -20,9 +20,9 @@ h1 = I18n.t("views.sources.index.sources")
           td = link_to source.url, source.url, target: '_blank'
           td = link_to source.rss_feed, source.rss_feed, target: '_blank'
           td
-            = link_to edit_source_path(source) do
+            = link_to edit_source_path(source), class: 'edit_source_link' do
               i.fa.fa-pencil
-            = link_to source, method: :delete, confirm: I18n.t("views.sources.index.confirm_destroy"), style: 'margin-left: 25px;'
+            = link_to source, method: :delete, data: { confirm: I18n.t("views.sources.index.confirm_destroy") }, style: 'margin-left: 25px;', class: 'delete_source_link' do
               i.fa.fa-trash
 - else
   = I18n.t("views.sources.index.no_source")
