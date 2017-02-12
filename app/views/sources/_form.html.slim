@@ -1,4 +1,4 @@
-= form_for @source, url: sources_path, as: 'source' do |f|
+= form_for @source, url: (@source.id ? source_path(@source) : sources_path), as: 'source' do |f|
 
   .form-group
     = f.label :name

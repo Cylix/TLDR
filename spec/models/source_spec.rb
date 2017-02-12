@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Source, type: :model do
 
-  let(:source) { build(:source_with_user) }
+  let(:source) { build(:rss_source_with_user) }
 
   it 'expects source factory to be valid' do
     expect(source.valid?).to be_truthy

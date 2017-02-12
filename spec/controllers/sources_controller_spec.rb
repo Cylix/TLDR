@@ -5,8 +5,8 @@ RSpec.describe SourcesController, type: :controller do
   let(:user_1) { create(:user) }
   let(:user_2) { create(:user_edited) }
 
-  let!(:source_1) { create(:source, user: user_1) }
-  let!(:source_2) { create(:source, user: user_2) }
+  let!(:source_1) { create(:rss_source, user: user_1) }
+  let!(:source_2) { create(:rss_source, user: user_2) }
 
   describe 'index' do
 
@@ -75,7 +75,7 @@ RSpec.describe SourcesController, type: :controller do
 
   describe 'create' do
 
-    let(:new_source) { build(:source_edited) }
+    let(:new_source) { build(:rss_source_edited) }
 
     describe 'unauthenticated' do
 
@@ -190,7 +190,7 @@ RSpec.describe SourcesController, type: :controller do
 
   describe 'update' do
 
-    let(:new_source) { build(:source_edited) }
+    let(:new_source) { build(:rss_source_edited) }
 
     describe 'unauthenticated' do
 

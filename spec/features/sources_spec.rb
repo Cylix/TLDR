@@ -8,8 +8,8 @@ RSpec.feature "Sources", type: :feature do
 
     let(:user_2) { create(:user_edited) }
 
-    let!(:source_1) { create(:source, user: user_1) }
-    let!(:source_2) { create(:source_edited, user: user_2) }
+    let!(:source_1) { create(:rss_source, user: user_1) }
+    let!(:source_2) { create(:rss_source_edited, user: user_2) }
 
     describe 'unauthenticated' do
 
@@ -55,7 +55,7 @@ RSpec.feature "Sources", type: :feature do
 
   describe 'create' do
 
-    let!(:source_1) { build(:source, user: user_1) }
+    let!(:source_1) { build(:rss_source, user: user_1) }
 
     describe 'unauthenticated' do
 
@@ -152,8 +152,8 @@ RSpec.feature "Sources", type: :feature do
 
     let(:user_2) { create(:user_edited) }
 
-    let!(:source_1) { create(:source, user: user_1) }
-    let!(:source_2) { create(:source, user: user_2) }
+    let!(:source_1) { create(:rss_source, user: user_1) }
+    let!(:source_2) { create(:rss_source, user: user_2) }
 
     describe 'unauthenticated' do
 
@@ -175,7 +175,7 @@ RSpec.feature "Sources", type: :feature do
 
         describe 'with valid data' do
 
-          let(:source_edited) { build(:source_edited) }
+          let(:source_edited) { build(:rss_source_edited) }
 
           before :each do
             visit edit_source_path source_1
@@ -267,7 +267,7 @@ RSpec.feature "Sources", type: :feature do
 
     # no unauthenticated tests since it requires to access the list page first
 
-    let!(:source_1) { create(:source, user: user_1) }
+    let!(:source_1) { create(:rss_source, user: user_1) }
 
     before :each do
       login_as user_1, scope: :user
