@@ -1,7 +1,5 @@
 class Source < ApplicationRecord
 
-  include URLHelper
-
   # associations
   belongs_to :user
 
@@ -23,7 +21,7 @@ class Source < ApplicationRecord
 
   # validates url format
   def validates_url_format
-    errors.add(:url, :invalid) unless valid_url?(url)
+    errors.add(:url, :invalid) unless URLHelper::valid_url?(url)
   end
 
 end

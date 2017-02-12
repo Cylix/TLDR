@@ -208,6 +208,56 @@ RSpec.describe SourcesController, type: :controller do
 
       describe 'to update owned source' do
 
+        describe 'when changing type' do
+
+          describe 'with valid data' do
+
+            let(:source_edited) { build(:youtube_source) }
+
+            it 'should work' do
+              put :update, params: { id: source_1.id, source: source_edited.attributes }
+              expect(response.status).to eq 302
+              expect(response).to redirect_to action: :index
+              expect(flash[:success]).not_to be_nil
+            end
+
+            it 'should udpate the requested resource' do
+              put :update, params: { id: source_1.id, source: source_edited.attributes }
+
+              source = user_1.sources.first
+
+              expect(source.name).to eq source_edited.name
+              expect(source.description).to eq source_edited.description
+              expect(source.url).to eq source_edited.url
+              expect(source.rss_feed).to eq source_edited.rss_feed
+            end
+
+          end
+
+          describe 'with invalid data' do
+
+            let(:source_edited) { build(:rss_source) }
+            let!(:source_3) { create(:youtube_source, user: user_1) }
+
+            before :each { source_edited.rss_feed = '' }
+
+            it 'should work' do
+              put :update, params: { id: source_3.id, source: source_edited.attributes }
+              expect(response.status).to eq 400
+              expect(response).to render_template :edit
+              expect(flash[:resource_errors]).not_to be_nil
+            end
+
+            it 'should not udpate the requested resource' do
+              expect {
+                put :update, params: { id: source_3.id, source: source_edited.attributes }
+              }.not_to change{ source_3.reload }
+            end
+
+          end
+
+        end
+
         describe 'with valid data' do
 
           it 'should work' do

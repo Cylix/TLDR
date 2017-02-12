@@ -8,7 +8,7 @@ class Source::RSS < Source
 
   # validates rss_feed format
   def validates_rss_feed_format
-    errors.add(:rss_feed, :invalid) unless valid_url?(rss_feed)
+    errors.add(:rss_feed, :invalid) unless URLHelper::valid_url?(rss_feed)
   end
 
 end

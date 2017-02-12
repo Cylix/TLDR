@@ -56,6 +56,33 @@ RSpec.describe Source, type: :model do
 
     end
 
+    describe 'type' do
+
+      describe 'presence' do
+
+        it "can't be empty" do
+          source.type = ""
+          expect(source.valid?).to be_falsey
+        end
+
+        it "can't be nil" do
+          source.type = nil
+          expect(source.valid?).to be_falsey
+        end
+
+      end
+
+      describe 'included' do
+
+        it "can't be an invalid value" do
+          source.type = 'hello'
+          expect(source.valid?).to be_falsey
+        end
+
+      end
+
+    end
+
     describe 'url' do
 
       describe 'presence' do
