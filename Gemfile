@@ -11,6 +11,7 @@ gem 'rails', '~> 5.0.0'
 gem 'sass-rails', '~> 5.0'
 gem 'slim'
 gem 'sqlite3'
+gem 'tether-rails'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
