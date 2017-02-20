@@ -25,6 +25,18 @@ class Source < ApplicationRecord
     Source::descendants.map(&:to_s).include? type
   end
 
+  # Return the synchronizer associated to that source
+  # Must be implemented by child classes
+  def self.synchronizer
+    raise "No synchronizer defined for source type '#{self.to_s}'"
+  end
+
+  # returns the list of fields specific to this particular type of source
+  # Should be implemented by child classes
+  def self.type_specific_fields
+    %w[]
+  end
+
   private
 
   # validates url format
