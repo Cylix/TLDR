@@ -24,5 +24,7 @@ module TLDR
 
     # locales files
     config.i18n.load_path += Dir[File.join(Rails.root, 'config', 'locales', '**', '*.{rb,yml}')]
+    # autoload paths
+    config.autoload_paths << Rails.root.join('lib')
   end
 end
