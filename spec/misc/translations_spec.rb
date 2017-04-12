@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 # Activerecord translations are not exactly the same between french and english
-# Some keys are more details (zero, one, other for example)
+# Some keys are more detailed (zero, one, other for example)
 # So we skip them here to avoid issues
 #
 # This array should only contain default activerecord keys here

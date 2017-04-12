@@ -1,0 +1,22 @@
+- content_for :content_link_active, 'active'
+
+h1 = I18n.t("views.contents.index.contents")
+
+- if @contents.any?
+  table.table
+    thead.thead-inverse
+      tr
+        th = I18n.t("activerecord.attributes.content.title")
+        th = I18n.t("activerecord.attributes.content.description")
+        th = I18n.t("activerecord.attributes.content.url")
+        th = I18n.t("activerecord.attributes.content.source")
+
+    tbody
+      - @contents.each do |content|
+        tr
+          td = content.title
+          td = content.description.blank? ? I18n.t("views.contents.index.no_description") : content.description
+          td = link_to content.url, content.url, target: '_blank'
+          td = link_to printable_source_type(content.source.type), edit_source_path(content.source)
+- else
+  = I18n.t("views.contents.index.no_content")

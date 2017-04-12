@@ -1,0 +1,7 @@
+fr:
+  views:
+    contents:
+      index:
+        contents: Contenus
+        no_description: Aucune description
+        no_content: Aucun contenu

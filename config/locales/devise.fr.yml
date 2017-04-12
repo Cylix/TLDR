@@ -23,8 +23,10 @@ fr:
         subject: "Instructions pour changer le mot de passe"
       unlock_instructions:
         subject: "Instructions pour déverrouiller le compte"
+      email_changed:
+        subject: "Votre email a été modifié avec succès"
       password_change:
-        subject: "Votre mot de passe a été modifié avec succés."
+        subject: "Votre mot de passe a été modifié avec succès."
     omniauth_callbacks:
       failure: "Nous n'avons pas pu vous authentifier via %{kind} : '%{reason}'."
       success: "Authentifié avec succès via %{kind}."

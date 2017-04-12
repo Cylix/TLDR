@@ -3,5 +3,6 @@ en:
     shared:
       navbar:
         create_source: "Create"
+        contents: "Contents"
         list_sources: "All sources"
         sources: "Content sources"

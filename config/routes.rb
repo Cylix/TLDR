@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   # sources
   resources :sources, except: :show
 
+  # contents
+  resources :contents, only: :index
+
 end

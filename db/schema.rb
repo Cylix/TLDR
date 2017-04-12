@@ -14,9 +14,10 @@ ActiveRecord::Schema.define(version: 20170221003338) do
 
   create_table "contents", force: :cascade do |t|
     t.string   "title",       default: "", null: false
+    t.string   "url",         default: "", null: false
     t.text     "description", default: "", null: false
-    t.integer  "user_id",                  null: false
-    t.string   "source_id",   default: "", null: false
+    t.integer  "user_id",     default: 0,  null: false
+    t.integer  "source_id",   default: 0,  null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end

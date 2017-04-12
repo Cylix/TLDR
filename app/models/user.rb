@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   # associations
   has_many :sources, dependent: :destroy
+  has_many :contents, dependent: :destroy
 
   # validations
   validates :first_name,  length: { minimum: 2 }, presence: true

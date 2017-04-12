@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      content: Content
+    attributes:
+      content:
+        title: "Title"
+        description: "Description"
+        source: "Source"
+        url: "URL"
