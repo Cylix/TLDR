@@ -17,6 +17,6 @@ h1 = I18n.t("views.contents.index.contents")
           td = content.title
           td = content.description.blank? ? I18n.t("views.contents.index.no_description") : content.description
           td = link_to content.url, content.url, target: '_blank'
-          td = link_to printable_source_type(content.source.type), edit_source_path(content.source)
+          td = link_to content.source.name, edit_source_path(content.source)
 - else
   = I18n.t("views.contents.index.no_content")

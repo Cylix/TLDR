@@ -44,6 +44,11 @@ RSpec.feature "RootPath", type: :feature do
         expect(page).to have_text user.to_s
       end
 
+      it 'should redirect to contents page' do
+        visit root_path
+        expect(current_path).to eq contents_path
+      end
+
     end
 
   end

@@ -2,6 +2,7 @@ class Source < ApplicationRecord
 
   # associations
   belongs_to :user
+  has_many :contents
 
   # validations
   validates :type,        inclusion: { in: Proc.new { descendants.map(&:to_s) } }
