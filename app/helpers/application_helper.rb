@@ -10,4 +10,15 @@ module ApplicationHelper
     resource&.errors&.full_messages
   end
 
+  # trunk text to first n words
+  def trunk_words(str, nb_words)
+    words = str.split(" ")
+
+    if words.length <= nb_words
+      str
+    else
+      words.first(nb_words).join(" ") + "..."
+    end
+  end
+
 end

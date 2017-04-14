@@ -15,6 +15,9 @@ class Content < ApplicationRecord
   validates_presence_of :source
   validates_associated  :source
 
+  # default scope
+  default_scope { order(created_at: :desc) }
+
   # validates url format
   def validates_url_format
     errors.add(:url, :invalid) unless URLHelper::valid_url?(url)
