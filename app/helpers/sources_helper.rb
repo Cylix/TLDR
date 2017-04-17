@@ -11,4 +11,9 @@ module SourcesHelper
     I18n.t("models.source.#{ type.underscore }")
   end
 
+  # return a font awesome class icon for a given source type
+  def iconable_source_type(type)
+    "fa-#{ type.underscore.split('/').last }"
+  end
+
 end

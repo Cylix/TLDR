@@ -16,7 +16,9 @@ h1 = I18n.t("views.sources.index.sources")
     tbody
       - @sources.each do |source|
         tr
-          td = printable_source_type(source.type)
+          td
+            i.fa.fa-fw class=(iconable_source_type source.type)
+            = printable_source_type(source.type)
           td = source.name
           td = source.description.blank? ? I18n.t("views.sources.index.no_description") : source.description
           td = link_to source.url, source.url, target: '_blank'

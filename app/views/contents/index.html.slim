@@ -3,18 +3,15 @@
 h1 = I18n.t("views.contents.index.contents")
 
 - if @contents.any?
-  table.table
-    thead.thead-inverse
-      tr
-        th = I18n.t("activerecord.attributes.content.title")
-        th = I18n.t("activerecord.attributes.content.description")
-        th = I18n.t("activerecord.attributes.content.source")
+  - @contents.each do |content|
+    .card
+      .card-block
+        h4.card-title = content.title
+        h6.card-subtitle.mb-2.text-muted
+          i.fa.fa-fw class=(iconable_source_type content.source.type)
+          = content.source.name
+        p.card-textSome = content.description.blank? ? I18n.t("views.contents.index.no_description") : trunk_words(sanitize(content.description, tags:[]), 150)
+        td = link_to I18n.t("views.contents.index.view_content"), content.url, target: '_blank'
 
-    tbody
-      - @contents.each do |content|
-        tr
-          td = link_to content.title, content.url, target: '_blank'
-          td = content.description.blank? ? I18n.t("views.contents.index.no_description") : trunk_words(sanitize(content.description, tags:[]), 50)
-          td = link_to content.source.name, edit_source_path(content.source)
 - else
   = I18n.t("views.contents.index.no_content")
