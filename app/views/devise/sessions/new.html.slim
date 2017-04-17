@@ -11,12 +11,12 @@
         .input-group
           span.input-group-addon
             i.fa.fa-envelope.fa-fw
-          = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'mail@example.com'
+          = f.email_field :email, autofocus: true, class: 'form-control', placeholder: I18n.t("activerecord.attributes.user.email")
       .field.form-group
         .input-group
           span.input-group-addon
             i.fa.fa-lock.fa-fw
-          = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'password'
+          = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: I18n.t("activerecord.attributes.user.password")
       - if devise_mapping.rememberable?
         .field.form-check
           = f.label :remember_me, class: 'form-check-label' do

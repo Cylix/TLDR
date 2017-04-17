@@ -39,13 +39,15 @@ RSpec.feature "Contents", type: :feature do
       end
 
       it 'should display the user source' do
-        expect(page).to have_link content_1.title, href: content_1.url
+        expect(page).to have_link I18n.t("views.contents.index.view_content"), href: content_1.url
+        expect(page).to have_content content_1.title
         expect(page).to have_content content_1.description
         expect(page).to have_content content_1.source.name
       end
 
       it 'should not display the other user source' do
-        expect(page).not_to have_link content_2.title, href: content_2.url
+        expect(page).not_to have_link I18n.t("views.contents.index.view_content"), href: content_2.url
+        expect(page).not_to have_content content_2.title
         expect(page).not_to have_content content_2.description
         expect(page).not_to have_content content_2.source.name
       end
