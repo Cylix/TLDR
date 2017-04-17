@@ -1,4 +1,4 @@
-class SourcesController < ApplicationController
+class SourcesController < DashboardController
 
   before_action :authenticate_user!
   before_action :fetch_source, only: [:edit, :update, :destroy]

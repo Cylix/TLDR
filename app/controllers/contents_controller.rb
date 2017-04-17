@@ -1,6 +1,4 @@
-class ContentsController < ApplicationController
-
-  before_action :authenticate_user!
+class ContentsController < DashboardController
 
   # GET /contents
   # list all contents

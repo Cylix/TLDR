@@ -1,0 +1,20 @@
+.sidebar
+  nav.sidebar-nav
+    ul.nav
+      //! Contents
+      li.nav-title = I18n.t("views.shared.navbar.contents")
+      li.nav-item
+        = link_to contents_path, class: "nav-link #{yield :content_link_active}" do
+          i.fa.fa-list.fa-fw
+          = I18n.t("views.shared.navbar.list_contents")
+
+      //! Sources
+      li.nav-title = I18n.t("views.shared.navbar.sources")
+      li.nav-item
+        = link_to sources_path, class: "nav-link #{yield :source_link_list_active}" do
+          i.fa.fa-list.fa-fw
+          = I18n.t("views.shared.navbar.list_sources")
+      li.nav-item
+        = link_to new_source_path, class: "nav-link #{yield :source_link_new_active}" do
+          i.fa.fa-plus.fa-fw
+          = I18n.t("views.shared.navbar.create_source")

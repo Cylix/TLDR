@@ -4,5 +4,6 @@ en:
       navbar:
         create_source: "Create"
         contents: "Contents"
+        list_contents: "All contents"
         list_sources: "All sources"
         sources: "Content sources"

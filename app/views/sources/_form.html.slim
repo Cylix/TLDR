@@ -2,7 +2,10 @@
 
   .form-group
     = f.label :name
-    = f.text_field :name, autofocus: true, class: 'form-control'
+    .input-group
+      span.input-group-addon
+        i.fa.fa-id-card-o.fa-fw
+      = f.text_field :name, autofocus: true, class: 'form-control'
 
   .form-group
     = f.label :description
@@ -14,11 +17,17 @@
 
   .form-group
     = f.label :url
-    = f.text_field :url, class: 'form-control'
+    .input-group
+      span.input-group-addon
+        i.fa.fa-link.fa-fw
+      = f.text_field :url, class: 'form-control'
 
   .form-group.type_specific_field
     = f.label :rss_feed
-    = f.text_field :rss_feed, class: 'form-control'
+    .input-group
+      span.input-group-addon
+        i.fa.fa-rss.fa-fw
+      = f.text_field :rss_feed, class: 'form-control'
 
   = f.submit I18n.t("views.sources.form.submit"), class: 'btn btn-primary btn-block'
 

@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title TLDR
+
+    //! CSRF
+    = csrf_meta_tags
+
+    //! JS & CSS
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  body.app.header-fixed.sidebar-fixed.aside-menu-fixed.aside-menu-hidden
+
+    = render 'shared/navbar_dashboard_top'
+
+    .app-body
+      = render 'shared/navbar_dashboard_side'
+
+      .main
+        .container-fluid
+          .animated.fadeIn
+            = render 'shared/flash_messages'
+            == yield
