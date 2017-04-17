@@ -1,22 +1,29 @@
 - content_for :log_in_link_active, 'active'
 
-h2 Log in
+.col-md-4.offset-md-4.signin-box
 
-.col-md-5
-  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-    = render 'devise/shared/flash_messages'
-    .field.form-group
-      = f.label :email
-      = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'mail@example.com'
-    .field.form-group
-      = f.label :password
-      = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'password'
-    - if devise_mapping.rememberable?
-      .field.form-check
-        = f.label :remember_me, class: 'form-check-label' do
-          = f.check_box :remember_me, class: 'form-check-input'
-          | Remember me
-    .actions
-      = f.submit "Log in", class: 'btn btn-primary btn-block'
+  h2 Log in
 
-  = render "devise/shared/links"
+  .signin-form
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = render 'devise/shared/flash_messages'
+      .field.form-group
+        .input-group
+          span.input-group-addon
+            i.fa.fa-envelope.fa-fw
+          = f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'mail@example.com'
+      .field.form-group
+        .input-group
+          span.input-group-addon
+            i.fa.fa-lock.fa-fw
+          = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'password'
+      - if devise_mapping.rememberable?
+        .field.form-check
+          = f.label :remember_me, class: 'form-check-label' do
+            = f.check_box :remember_me, class: 'form-check-input'
+            | Remember me
+      .actions
+        = f.submit "Log in", class: 'btn btn-primary btn-block'
+
+  .devise-shared-links
+    = render "devise/shared/links"

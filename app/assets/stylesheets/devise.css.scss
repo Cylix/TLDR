@@ -1,0 +1,17 @@
+.signup-box, .signin-box, .forgot-pwd-box {
+  background-color: #f6f6f6;
+  border-radius: 5px;
+  padding: 25px;
+}
+
+.signup-form, .signin-form, .forgot-pwd-form {
+  margin-top: 15px;
+}
+
+.devise-shared-links {
+  margin-top: 15px;
+}
+
+.field_with_errors {
+    display: block !important;
+}
