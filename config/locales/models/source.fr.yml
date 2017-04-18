@@ -15,6 +15,11 @@ fr:
       source/rss: RSS
       source/twitter: Twitter
       source/youtube: Youtube
+      synchronization_state:
+        never: Jamais synchronizé
+        in_progress: Synchronization en cours
+        success: Synchronizé avec succès
+        fail: Échec de la synchronization
   errors:
     models:
       source:

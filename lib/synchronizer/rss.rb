@@ -11,7 +11,13 @@ class Synchronizer::RSS < Synchronizer
 
       # iterate over the elements
       feed.items.each do |item|
-        content = Content.new title: item.title, description: item.description, url: item.link, source: @source, user: @source.user
+        content = Content.new title:            item.title,
+                              description:      item.description,
+                              url:              item.link,
+                              published_at:     item.date,
+                              synchronized_at:  Time.now,
+                              source:           @source,
+                              user:             @source.user
 
         if content.save
           puts "[Import][Success] content_id: #{content.id} source_id: #{@source.id} user_id: #{@source.user.id}"

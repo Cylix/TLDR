@@ -29,10 +29,13 @@ class ImportContentJob < ApplicationJob
     Source.all.each do |source|
       begin
         Rails.logger.info "[ImportContentJob] Synchronization started for source: #{source}"
+        source.update_attribute :synchronization_state, :in_progress
         source.synchronizer.synchronize!
+        source.update_attributes synchronization_state: :success, last_synchronized_at: Time.now
         Rails.logger.info "[ImportContentJob] Synchronization finished for source: #{source}"
       rescue Exception => e
         Rails.logger.info "[ImportContentJob] Synchronization failed for source: #{source} (#{e.to_s})"
+        source.update_attributes synchronization_state: :fail, last_synchronized_at: Time.now
       end
     end
   end

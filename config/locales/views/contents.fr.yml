@@ -3,6 +3,8 @@ fr:
     contents:
       index:
         contents: Contenus
+        imported_at: Importé il y a %{synchronized_at}
         no_description: Aucune description
         no_content: Aucun contenu
+        pusblished_and_imported_at: Publié il y a %{published_at} ago, importé il y a %{synchronized_at} ago
         view_content: Voir le contenu

@@ -8,6 +8,7 @@ en:
       index:
         actions: Actions
         confirm_destroy: Are you sure to be willing to remove this source?
+        last_synchronized_at: Last synchronization occurred %{last_synchronized_at} ago
         no_description: No description
         no_source: No source
         sources: Content sources

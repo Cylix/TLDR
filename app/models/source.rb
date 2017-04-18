@@ -1,14 +1,19 @@
 class Source < ApplicationRecord
 
+  # Enum values for synchronization_state
+  SYNCHRONIZATION_STATE_VALUES = [:never, :in_progress, :success, :fail]
+  enum synchronization_state: SYNCHRONIZATION_STATE_VALUES
+
   # associations
   belongs_to :user
   has_many :contents
 
   # validations
-  validates :type,        inclusion: { in: Proc.new { descendants.map(&:to_s) } }
-  validates :name,        length: { minimum: 2 }, presence: true
-  validates :description, length: { minimum: 0, allow_nil: false, message: I18n.t("activerecord.errors.models.source.description.nil") }
-  validates :url,         presence: true
+  validates :type,                  inclusion: { in: Proc.new { descendants.map(&:to_s) } }
+  validates :name,                  length: { minimum: 2 }, presence: true
+  validates :description,           length: { minimum: 0, allow_nil: false, message: I18n.t("activerecord.errors.models.source.description.nil") }
+  validates :url,                   presence: true
+  validates :synchronization_state, inclusion: { in: SYNCHRONIZATION_STATE_VALUES.map(&:to_s) }
   validate  :validates_url_format
   # association validations
   validates_presence_of :user

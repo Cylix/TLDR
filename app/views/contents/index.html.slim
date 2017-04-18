@@ -9,9 +9,14 @@ h1 = I18n.t("views.contents.index.contents")
         h4.card-title = content.title
         h6.card-subtitle.mb-2.text-muted
           i.fa.fa-fw class=(iconable_source_type content.source.type)
-          = content.source.name
-        p.card-textSome = content.description.blank? ? I18n.t("views.contents.index.no_description") : trunk_words(sanitize(content.description, tags:[]), 150)
-        td = link_to I18n.t("views.contents.index.view_content"), content.url, target: '_blank'
+          = link_to content.source.name, edit_source_path(content.source), class: 'text-muted'
+        p.card-text = content.description.blank? ? I18n.t("views.contents.index.no_description") : trunk_words(sanitize(content.description, tags:[]), 150)
+        p.card-text = link_to I18n.t("views.contents.index.view_content"), content.url, target: '_blank'
+        p.card-text
+          - if content.published_at
+            small.text-muted = I18n.t('views.contents.index.pusblished_and_imported_at', published_at: time_ago_in_words(content.published_at), synchronized_at: time_ago_in_words(content.synchronized_at))
+          - else
+            small.text-muted = I18n.t('views.contents.index.imported_at', synchronized_at: time_ago_in_words(content.synchronized_at))
 
 - else
   = I18n.t("views.contents.index.no_content")

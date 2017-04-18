@@ -3,30 +3,30 @@
 h1 = I18n.t("views.sources.index.sources")
 
 - if @sources.any?
-  table.table
-    thead.thead-inverse
-      tr
-        th = I18n.t("activerecord.attributes.source.type")
-        th = I18n.t("activerecord.attributes.source.name")
-        th = I18n.t("activerecord.attributes.source.description")
-        th = I18n.t("activerecord.attributes.source.url")
-        th = I18n.t("activerecord.attributes.source.rss_feed")
-        th = I18n.t("views.sources.index.actions")
+  .row
+    - @sources.each do |source|
+      .col-md-6
+        .card
+          .card-block
+            h4.card-title
+              i.fa.fa-fw class=(iconable_source_type source.type)
+              = source.name
+            p.card-text = source.description.blank? ? I18n.t("views.sources.index.no_description") : trunk_words(sanitize(source.description, tags:[]), 150)
+          .card-footer
+            .row
+              .col-md-10
+                small class=(colorized_synchronization_state source.synchronization_state)
+                  i.fa.fa-fw class=(iconable_synchronization_state source.synchronization_state)
+                  = printable_synchronization_state source.synchronization_state
+                - if source.last_synchronized_at = Time.now
+                  br
+                  small.text-muted = I18n.t('views.sources.index.last_synchronized_at', last_synchronized_at: time_ago_in_words(source.last_synchronized_at))
+              .col-md-2
+                .pull-right
+                  = link_to edit_source_path(source), class: 'text-muted' do
+                    i.fa.fa-fw.fa-lg.fa-pencil
+                  = link_to source_path(source), method: :delete, data: { confirm: I18n.t("views.sources.index.confirm_destroy") }, style: 'margin-left: 10px;', class: 'delete_source_link text-muted' do
+                    i.fa.fa-fw.fa-lg.fa-trash
 
-    tbody
-      - @sources.each do |source|
-        tr
-          td
-            i.fa.fa-fw class=(iconable_source_type source.type)
-            = printable_source_type(source.type)
-          td = source.name
-          td = source.description.blank? ? I18n.t("views.sources.index.no_description") : source.description
-          td = link_to source.url, source.url, target: '_blank'
-          td = link_to source.rss_feed, source.rss_feed, target: '_blank'
-          td
-            = link_to edit_source_path(source), class: 'edit_source_link' do
-              i.fa.fa-pencil
-            = link_to source_path(source), method: :delete, data: { confirm: I18n.t("views.sources.index.confirm_destroy") }, style: 'margin-left: 25px;', class: 'delete_source_link' do
-              i.fa.fa-trash
 - else
   = I18n.t("views.sources.index.no_source")

@@ -3,6 +3,8 @@ en:
     contents:
       index:
         contents: Contents
+        imported_at: Imported %{synchronized_at} ago
         no_description: No description
         no_content: No content
+        pusblished_and_imported_at: Published %{published_at} ago, imported %{synchronized_at} ago
         view_content: View content
