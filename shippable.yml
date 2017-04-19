@@ -1,0 +1,13 @@
+language: ruby
+
+rvm:
+  - 2.3.3
+
+services:
+  - sqlite
+
+build:
+  ci:
+    - RAILS_ENV=test bundle install
+    - RAILS_ENV=test rake db:migrate
+    - bundle exec rspec

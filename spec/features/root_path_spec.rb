@@ -27,7 +27,7 @@ RSpec.feature "RootPath", type: :feature do
 
     context 'authenticated' do
 
-      before :each { login_as user, scope: :user }
+      before(:each) { login_as user, scope: :user }
 
       it 'should work' do
         visit root_path

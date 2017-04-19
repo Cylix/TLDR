@@ -8,7 +8,7 @@ RSpec.feature "Devises", type: :feature do
 
       let(:user) { build(:user) }
 
-      before :each do
+      before(:each) do
         visit new_user_registration_path
 
         fill_in "First name",            with: user.first_name
@@ -42,7 +42,7 @@ RSpec.feature "Devises", type: :feature do
 
     context 'invalid submission' do
 
-      before :each do
+      before(:each) do
         visit new_user_registration_path
         click_button 'Sign up'
       end
@@ -72,7 +72,7 @@ RSpec.feature "Devises", type: :feature do
 
     context 'valid submission' do
 
-      before :each do
+      before(:each) do
         visit new_user_session_path
 
         fill_in "Email",                 with: user.email
@@ -95,7 +95,7 @@ RSpec.feature "Devises", type: :feature do
 
       context 'invalid email' do
 
-        before :each do
+        before(:each) do
           visit new_user_session_path
 
           fill_in "Email",                 with: user.email + 'a'
@@ -124,7 +124,7 @@ RSpec.feature "Devises", type: :feature do
 
       context 'invalid password' do
 
-        before :each do
+        before(:each) do
           visit new_user_session_path
 
           fill_in "Email",                 with: user.email
@@ -159,7 +159,7 @@ RSpec.feature "Devises", type: :feature do
 
     let(:user) { create(:user) }
 
-    before :each { login_as user, scope: :user }
+    before(:each) { login_as user, scope: :user }
 
     it 'should disconnect' do
       visit root_path

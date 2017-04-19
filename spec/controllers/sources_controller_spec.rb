@@ -22,7 +22,7 @@ RSpec.describe SourcesController, type: :controller do
 
     describe 'authenticated' do
 
-      before :each { sign_in user_1 }
+      before(:each) { sign_in user_1 }
 
       it 'should work' do
         get :index
@@ -55,7 +55,7 @@ RSpec.describe SourcesController, type: :controller do
 
     describe 'authenticated' do
 
-      before :each { sign_in user_1 }
+      before(:each) { sign_in user_1 }
 
       it 'should work' do
         get :new
@@ -89,7 +89,7 @@ RSpec.describe SourcesController, type: :controller do
 
     describe 'authenticated' do
 
-      before :each { sign_in user_1 }
+      before(:each) { sign_in user_1 }
 
       describe 'with valid data' do
 
@@ -117,7 +117,7 @@ RSpec.describe SourcesController, type: :controller do
 
       describe 'with invalid data' do
 
-        before :each { new_source.name = '' }
+        before(:each) { new_source.name = '' }
 
         it 'should work' do
           post :create, params: { source: new_source.attributes }
@@ -152,7 +152,7 @@ RSpec.describe SourcesController, type: :controller do
 
     describe 'authenticated' do
 
-      before :each { sign_in user_1 }
+      before(:each) { sign_in user_1 }
 
       describe 'to edit owned source' do
 
@@ -205,7 +205,7 @@ RSpec.describe SourcesController, type: :controller do
 
     describe 'authenticated' do
 
-      before :each { sign_in user_1 }
+      before(:each) { sign_in user_1 }
 
       describe 'to update owned source' do
 
@@ -241,7 +241,7 @@ RSpec.describe SourcesController, type: :controller do
             let(:source_edited) { build(:rss_source) }
             let!(:source_3) { create(:youtube_source, user: user_1) }
 
-            before :each { source_edited.rss_feed = '' }
+            before(:each) { source_edited.rss_feed = '' }
 
             it 'should work' do
               put :update, params: { id: source_3.id, source: source_edited.attributes }
@@ -284,7 +284,7 @@ RSpec.describe SourcesController, type: :controller do
 
         describe 'with invalid data' do
 
-          before :each { new_source.name = '' }
+          before(:each) { new_source.name = '' }
 
           it 'should work' do
             put :update, params: { id: source_1.id, source: new_source.attributes }
@@ -338,7 +338,7 @@ RSpec.describe SourcesController, type: :controller do
 
     describe 'authenticated' do
 
-      before :each { sign_in user_1 }
+      before(:each) { sign_in user_1 }
 
       describe 'to destroy owned source' do
 

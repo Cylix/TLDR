@@ -25,7 +25,7 @@ RSpec.feature "Sources", type: :feature do
 
     describe 'authenticated' do
 
-      before :each do
+      before(:each) do
         login_as user_1, scope: :user
         visit sources_path
       end
@@ -74,7 +74,7 @@ RSpec.feature "Sources", type: :feature do
 
       describe 'with valid data' do
 
-        before :each do
+        before(:each) do
           login_as user_1, scope: :user
           visit new_source_path
 
@@ -116,7 +116,7 @@ RSpec.feature "Sources", type: :feature do
 
       describe 'with invalid data' do
 
-        before :each do
+        before(:each) do
           login_as user_1, scope: :user
           visit new_source_path
 
@@ -174,7 +174,7 @@ RSpec.feature "Sources", type: :feature do
 
     describe 'authenticated' do
 
-      before :each { login_as user_1, scope: :user }
+      before(:each) { login_as user_1, scope: :user }
 
       describe 'with owned source' do
 
@@ -184,7 +184,7 @@ RSpec.feature "Sources", type: :feature do
 
             let(:source_edited) { build(:youtube_source) }
 
-            before :each do
+            before(:each) do
               visit edit_source_path source_1
 
               fill_in 'Name',             with: source_edited.name
@@ -227,7 +227,7 @@ RSpec.feature "Sources", type: :feature do
 
             let!(:source_3) { create(:youtube_source, user: user_1) }
 
-            before :each do
+            before(:each) do
               visit edit_source_path source_3
 
               # Then try to submit by setting again RSS, but without the URL
@@ -259,7 +259,7 @@ RSpec.feature "Sources", type: :feature do
 
           let(:source_edited) { build(:rss_source_edited) }
 
-          before :each do
+          before(:each) do
             visit edit_source_path source_1
 
             fill_in 'Name',             with: source_edited.name
@@ -297,7 +297,7 @@ RSpec.feature "Sources", type: :feature do
 
         describe 'with invalid data' do
 
-          before :each do
+          before(:each) do
             visit edit_source_path source_1
 
             fill_in 'Name',         with: ''
@@ -355,7 +355,7 @@ RSpec.feature "Sources", type: :feature do
 
     let!(:source_1) { create(:rss_source, user: user_1) }
 
-    before :each do
+    before(:each) do
       login_as user_1, scope: :user
       visit sources_path
       find('.delete_source_link').click

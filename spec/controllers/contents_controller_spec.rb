@@ -25,7 +25,7 @@ RSpec.describe ContentsController, type: :controller do
 
     describe 'authenticated' do
 
-      before :each { sign_in user_1 }
+      before(:each) { sign_in user_1 }
 
       it 'should work' do
         get :index

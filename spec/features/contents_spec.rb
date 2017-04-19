@@ -28,7 +28,7 @@ RSpec.feature "Contents", type: :feature do
 
     describe 'authenticated' do
 
-      before :each do
+      before(:each) do
         login_as user_1, scope: :user
         visit contents_path
       end

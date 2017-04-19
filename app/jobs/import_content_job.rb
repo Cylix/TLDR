@@ -2,7 +2,7 @@ class ImportContentJob < ApplicationJob
 
   queue_as :default
 
-  cattr_accessor :is_running { false }
+  cattr_accessor(:is_running) { false }
 
   def perform(*args)
     Rails.logger.info '[ImportContentJob] Job started'
