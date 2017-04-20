@@ -38,16 +38,11 @@ RSpec.feature "Sources", type: :feature do
       it 'should display the user source' do
         expect(page).to have_content source_1.name
         expect(page).to have_content source_1.description
-        expect(page).to have_content source_1.url
-        expect(page).to have_content source_1.rss_feed
-        expect(page).to have_content I18n.t("models.source.#{source_1.type.underscore}")
       end
 
       it 'should not display the other user source' do
         expect(page).not_to have_content source_2.name
         expect(page).not_to have_content source_2.description
-        expect(page).not_to have_content source_2.url
-        expect(page).not_to have_content source_2.rss_feed
       end
 
     end
@@ -95,9 +90,6 @@ RSpec.feature "Sources", type: :feature do
         it 'should display the user source' do
           expect(page).to have_content source_1.name
           expect(page).to have_content source_1.description
-          expect(page).to have_content source_1.url
-          expect(page).to have_content source_1.rss_feed
-          expect(page).to have_content I18n.t("models.source.#{source_1.type.underscore}")
         end
 
         it 'should create the source' do
@@ -204,9 +196,6 @@ RSpec.feature "Sources", type: :feature do
             it 'should display the edited user source' do
               expect(page).to have_content source_edited.name
               expect(page).to have_content source_edited.description
-              expect(page).to have_content source_edited.url
-              expect(page).to have_content source_edited.rss_feed
-              expect(page).to have_content I18n.t("models.source.#{source_edited.type.underscore}")
             end
 
             it 'should have updated the source' do
@@ -279,9 +268,6 @@ RSpec.feature "Sources", type: :feature do
           it 'should display the edited user source' do
             expect(page).to have_content source_edited.name
             expect(page).to have_content source_edited.description
-            expect(page).to have_content source_edited.url
-            expect(page).to have_content source_edited.rss_feed
-            expect(page).to have_content I18n.t("models.source.#{source_edited.type.underscore}")
           end
 
           it 'should have updated the source' do
@@ -369,9 +355,6 @@ RSpec.feature "Sources", type: :feature do
     it 'should not display the source anymore' do
       expect(page).not_to have_content source_1.name
       expect(page).not_to have_content source_1.description
-      expect(page).not_to have_content source_1.url
-      expect(page).not_to have_content source_1.rss_feed
-      expect(page).not_to have_content I18n.t("models.source.#{source_1.type.underscore}")
 
       expect(page).to have_content 'No source'
     end

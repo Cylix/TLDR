@@ -5,9 +5,9 @@ class Content < ApplicationRecord
   belongs_to :source
 
   # validations
-  validates :title,         presence: true
-  validates :url,           presence: true
-  validates :published_at,  presence: true
+  validates :title,           presence: true
+  validates :url,             presence: true
+  validates :synchronized_at, presence: true
   validate  :validates_url_format
 
   # association validations
