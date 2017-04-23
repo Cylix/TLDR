@@ -30,6 +30,16 @@ FactoryGirl.define do
     association :user, factory: :user, strategy: :build
   end
 
+  factory :rss_source_edited_2, class: Source::RSS do
+    name          'RSS with another edit'
+    description   'RSS with another edit feed'
+    url           'https://blog.com/zzz'
+    rss_feed      'https://blog.com/zzz/rss'
+    type          'Source::RSS'
+
+    association :user, factory: :user, strategy: :build
+  end
+
   factory :rss_source_edited_with_user, class: Source::RSS do
     name          'RSS Edited'
     description   'RSS Edited feed'

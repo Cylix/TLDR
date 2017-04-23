@@ -18,9 +18,12 @@ h1 = I18n.t("views.sources.index.sources")
                 small class=(colorized_synchronization_state source.synchronization_state)
                   i.fa.fa-fw class=(iconable_synchronization_state source.synchronization_state)
                   = printable_synchronization_state source.synchronization_state
-                - if source.last_synchronized_at = Time.now
-                  br
-                  small.text-muted = I18n.t('views.sources.index.last_synchronized_at', last_synchronized_at: time_ago_in_words(source.last_synchronized_at))
+                br
+                small.text-muted
+                  - if source.last_synchronized_at = Time.now
+                    = I18n.t('views.sources.index.last_synchronized_at', last_synchronized_at: time_ago_in_words(source.last_synchronized_at))
+                  - else
+                    = I18n.t('views.sources.index.never_synchronized')
               .col-md-2
                 .pull-right
                   = link_to edit_source_path(source), class: 'text-muted' do

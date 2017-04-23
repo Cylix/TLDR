@@ -1,5 +1,12 @@
 require 'rails_helper'
 
+# time_ago_in_words
+require 'action_view'
+require 'action_view/helpers'
+include ActionView::Helpers::DateHelper
+
+include SourcesHelper
+
 RSpec.feature "Sources", type: :feature do
 
   let(:user_1) { create(:user) }
@@ -8,7 +15,10 @@ RSpec.feature "Sources", type: :feature do
 
     let(:user_2) { create(:user_edited) }
 
-    let!(:source_1) { create(:rss_source, user: user_1) }
+    # First source of user 1, never synchronized
+    let!(:source_1) { create(:rss_source, user: user_1, last_synchronized_at: nil) }
+    # Second source of user 1, synchronized now
+    let!(:source_1_edited) { create(:rss_source_edited_2, user: user_1, last_synchronized_at: Time.now) }
     let!(:source_2) { create(:rss_source_edited, user: user_2) }
 
     describe 'unauthenticated' do
@@ -38,6 +48,15 @@ RSpec.feature "Sources", type: :feature do
       it 'should display the user source' do
         expect(page).to have_content source_1.name
         expect(page).to have_content source_1.description
+        expect(page).to have_content I18n.t('views.sources.index.never_synchronized')
+        expect(page).to have_content SourcesHelper::printable_source_type source_1.type
+        expect(page).to have_content SourcesHelper::printable_synchronization_state source_1.synchronization_state
+
+        expect(page).to have_content source_1_edited.name
+        expect(page).to have_content source_1_edited.description
+        expect(page).to have_content I18n.t('views.sources.index.last_synchronized_at', last_synchronized_at: ActionView::Helpers::DateHelper::time_ago_in_words(source_1_edited.last_synchronized_at))
+        expect(page).to have_content SourcesHelper::printable_source_type source_1_edited.type
+        expect(page).to have_content SourcesHelper::printable_synchronization_state source_1_edited.synchronization_state
       end
 
       it 'should not display the other user source' do
@@ -90,6 +109,8 @@ RSpec.feature "Sources", type: :feature do
         it 'should display the user source' do
           expect(page).to have_content source_1.name
           expect(page).to have_content source_1.description
+          expect(page).to have_content SourcesHelper::printable_source_type source_1.type
+          expect(page).to have_content SourcesHelper::printable_synchronization_state source_1.synchronization_state
         end
 
         it 'should create the source' do
@@ -102,6 +123,9 @@ RSpec.feature "Sources", type: :feature do
           expect(created_source.url).to         eq source_1.url
           expect(created_source.rss_feed).to    eq source_1.rss_feed
           expect(created_source.type).to        eq source_1.type
+          # should never have been sync
+          expect(created_source.last_synchronized_at).to be_nil
+          expect(created_source.synchronization_state).to eq 'never'
         end
 
       end

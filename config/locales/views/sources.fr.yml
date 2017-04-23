@@ -9,6 +9,7 @@ fr:
         actions: Actions
         confirm_destroy: Êtes-vous sûr de vouloir supprimer cette source?
         last_synchronized_at: La dernière synchronization a eu lieu il y a %{last_synchronized_at}
+        never_synchronized: Jamais synchronizé
         no_description: Aucune description
         no_source: Aucune source
         sources: Sources de contenu

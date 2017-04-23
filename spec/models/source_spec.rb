@@ -10,6 +10,38 @@ RSpec.describe Source, type: :model do
 
   describe 'validations' do
 
+    describe 'synchronization_state' do
+
+      describe 'included in' do
+
+        it 'should be one of the allowed valued' do
+          expect{ source.synchronization_state = "abc" }.to raise_error ArgumentError
+        end
+
+      end
+
+    end
+
+    describe 'last_synchronized_at' do
+
+      it 'can be nil' do
+        source.last_synchronized_at = nil
+        expect(source.valid?).to be_truthy
+      end
+
+      it 'can be blank' do
+        source.last_synchronized_at = ''
+        expect(source.valid?).to be_truthy
+      end
+
+      it 'must be a date' do
+        source.last_synchronized_at = 'blabla'
+        expect(source.valid?).to be_truthy
+        expect(source.last_synchronized_at).to be_nil
+      end
+
+    end
+
     describe 'name' do
 
       describe 'presence' do
