@@ -35,6 +35,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'capybara', branch: :master
+  gem 'capistrano', '~> 3.6'
+  gem 'capistrano-rails', '~> 1.2'
+  gem 'capistrano-rvm'
   gem 'factory_girl_rails'
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 3.5'
