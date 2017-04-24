@@ -10,8 +10,14 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
-  body
+
+  body.app.header-fixed#landing_page_container
+
     = render 'shared/navbar_unauthenticated'
-    #page_content
-      = render 'shared/flash_messages'
-      == yield
+
+    .app-body
+      .main.vcenter
+        .container-fluid
+          .animated.fadeIn
+            = render 'shared/flash_messages'
+            == yield

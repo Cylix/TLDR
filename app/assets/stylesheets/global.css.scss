@@ -4,12 +4,6 @@ html, body {
   min-height: 100%;
 }
 
-//! Main container of page content
-#page_content {
-  min-height: 100%;
-  padding-top: 75px;
-}
-
 //! textarea design
 textarea.no_resize {
   resize: none;
@@ -18,4 +12,9 @@ textarea.no_resize {
 //! title in main body
 .main h1 {
   margin-top: 15px;
+}
+
+.vcenter {
+  align-items : center;
+  display : flex;
 }
