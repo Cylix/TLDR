@@ -29,8 +29,8 @@ RSpec.feature "SourcesHelper", type: :feature do
   describe 'iconable_source_type' do
 
     it 'should return the right fa class' do
-      { 'Source::RSS' => 'rss', 'Source::Youtube' => 'youtube', 'Source::Facebook' => 'facebook', 'Source::Twitter' => 'twitter' }.each do |k, v|
-        expect(SourcesHelper::iconable_source_type k).to eq "fa-#{v}"
+      { 'Source::RSS' => {icon:'rss',color:'warning'}, 'Source::Youtube' => {icon:'youtube',color:'danger'}, 'Source::Facebook' => {icon:'facebook',color:'info'}, 'Source::Twitter' => {icon:'twitter',color:'info'} }.each do |k, v|
+        expect(SourcesHelper::iconable_source_type k).to match /fa-#{v[:icon]} text-#{v[:color]}/
       end
     end
 

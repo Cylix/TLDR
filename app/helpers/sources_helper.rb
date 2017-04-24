@@ -22,7 +22,19 @@ module SourcesHelper
 
   # return a font awesome class icon for a given source type
   def iconable_source_type(type)
-    "fa-#{ type.underscore.split('/').last }"
+    type = type.underscore.split('/').last
+    icon = "fa-#{ type }"
+
+    case type
+    when 'rss'
+      "#{icon} text-warning"
+    when 'youtube'
+      "#{icon} text-danger"
+    when 'facebook'
+      "#{icon} text-info"
+    when 'twitter'
+      "#{icon} text-info"
+    end
   end
 
   # return an icon corresponding to the synchronization state
