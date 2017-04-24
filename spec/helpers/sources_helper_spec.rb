@@ -76,6 +76,15 @@ RSpec.feature "SourcesHelper", type: :feature do
       end
     end
 
+    describe 'uncolorized_iconable_source_type' do
+
+      it 'should return the right fa class' do
+        { 'Source::RSS' => 'rss', 'Source::Youtube' => 'youtube', 'Source::Facebook' => 'facebook', 'Source::Twitter' => 'twitter' }.each do |k, v|
+          expect(SourcesHelper::uncolorized_iconable_source_type k).to eq "fa-#{v}"
+        end
+      end
+
+    end
 
   end
 

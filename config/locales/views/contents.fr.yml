@@ -2,7 +2,8 @@ fr:
   views:
     contents:
       index:
-        contents: Contenus
+        all_contents: Tous les contenus
+        contents_for_source: Contenus pour la source %{source_name}
         imported_at: Importé il y a %{synchronized_at}
         no_description: Aucune description
         no_content: Aucun contenu

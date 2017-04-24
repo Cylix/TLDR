@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
   # contents
   resources :contents, only: :index
+  # contents filtering
+  get '/sources/:source_id/contents' => 'contents#index', as: :source_contents
 
 end

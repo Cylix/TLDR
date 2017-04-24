@@ -61,4 +61,9 @@ module SourcesHelper
     I18n.t("models.source.synchronization_state.#{ state }")
   end
 
+  # return a font awesome class icon for a given source type without color
+  def uncolorized_iconable_source_type(type)
+    "fa-#{ type.underscore.split('/').last }"
+  end
+
 end

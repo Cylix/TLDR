@@ -1,6 +1,10 @@
-- content_for :content_link_active, 'active'
+- content_for :current_source_filter, @source&.id
 
-h1 = I18n.t("views.contents.index.contents")
+h1
+  - if @source
+    = I18n.t("views.contents.index.contents_for_source", source_name: @source.name)
+  - else
+    = I18n.t("views.contents.index.all_contents")
 
 - if @contents.any?
   - @contents.each do |content|

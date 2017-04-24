@@ -2,11 +2,17 @@
   nav.sidebar-nav
     ul.nav
       //! Contents
+      - source_filter = yield :current_source_filter
       li.nav-title = I18n.t("views.shared.navbar.contents")
       li.nav-item
-        = link_to contents_path, class: "nav-link #{yield :content_link_active}" do
+        = link_to contents_path, class: "nav-link #{content_link_active_class source_filter, nil}" do
           i.fa.fa-list.fa-fw
           = I18n.t("views.shared.navbar.list_contents")
+      - current_user.sources.each do |source|
+        li.nav-item
+          = link_to source_contents_path(source.id), class: "nav-link #{content_link_active_class source_filter, source.id}" do
+            i.fa class=(uncolorized_iconable_source_type source.type)
+            = source.name
 
       //! Sources
       li.nav-title = I18n.t("views.shared.navbar.sources")

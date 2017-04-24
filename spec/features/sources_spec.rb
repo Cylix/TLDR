@@ -223,6 +223,7 @@ RSpec.feature "Sources", type: :feature do
             end
 
             it 'should have updated the source' do
+              user_1.reload
               expect(user_1.sources.count).to eq 1
 
               source = user_1.sources.first
