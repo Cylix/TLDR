@@ -4,7 +4,7 @@ class Source::RSS < Source
   validates :rss_feed, presence: true
   validate :validates_rss_feed_format
 
-  def self.synchronizer
+  def synchronizer
     Synchronizer::RSS.new self
   end
 

@@ -1,6 +1,6 @@
 class Source::Twitter < Source
 
-  def self.synchronizer
+  def synchronizer
     Synchronizer::Twitter.new self
   end
 

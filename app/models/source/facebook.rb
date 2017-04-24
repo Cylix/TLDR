@@ -1,7 +1,7 @@
 class Source::Facebook < Source
 
   # Return the synchronizer associated to that source
-  def self.synchronizer
+  def synchronizer
     Synchronizer::Facebook.new self
   end
 

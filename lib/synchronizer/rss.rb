@@ -19,10 +19,12 @@ class Synchronizer::RSS < Synchronizer
                               source:           @source,
                               user:             @source.user
 
-        if content.save
+        if already_synchronized? content
+          puts "[Import][Skip] content: #{content.title} already_synchronized"
+        elsif content.save
           puts "[Import][Success] content_id: #{content.id} source_id: #{@source.id} user_id: #{@source.user.id}"
         else
-          puts "[Failed][Fail] content: #{content.title} error:#{content.errors.full_messages}"
+          puts "[Import][Fail] content: #{content.title} error:#{content.errors.full_messages}"
         end
       end
     end

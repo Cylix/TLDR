@@ -1,6 +1,6 @@
 class Source::Youtube < Source
 
-  def self.synchronizer
+  def synchronizer
     Synchronizer::Youtube.new self
   end
 
