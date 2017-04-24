@@ -31,3 +31,6 @@ set :deploy_to, "/var/www/tldr.simon-ninon.fr"
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+# capistrano/passenger => restart by `touch tmp/restart.txt`
+set :passenger_restart_with_touch, true

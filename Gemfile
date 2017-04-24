@@ -36,6 +36,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'capybara', branch: :master
   gem 'capistrano', '~> 3.6'
+  gem 'capistrano-passenger'
   gem 'capistrano-rails', '~> 1.2'
   gem 'capistrano-rvm'
   gem 'factory_girl_rails'
