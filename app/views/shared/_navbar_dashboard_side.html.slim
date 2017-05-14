@@ -2,25 +2,44 @@
   nav.sidebar-nav
     ul.nav
       //! Contents
-      - source_filter = yield :current_source_filter
+      - page_info = yield :page_info
       li.nav-title = I18n.t("views.shared.navbar.contents")
       li.nav-item
-        = link_to contents_path, class: "nav-link #{content_link_active_class source_filter, nil}" do
+        = link_to contents_path, class: "nav-link #{navbar_active_link page_info, :contents, :all}" do
           i.fa.fa-list.fa-fw
           = I18n.t("views.shared.navbar.list_contents")
-      - current_user.sources.each do |source|
+      li.nav-item
+        = link_to filter_contents_path(:snoozed), class: "nav-link #{navbar_active_link page_info, :contents_of_type, :snoozed}" do
+          i.fa.fa-clock-o.fa-fw
+          = I18n.t("views.shared.navbar.snoozed")
+      li.nav-item
+        = link_to filter_contents_path(:done), class: "nav-link #{navbar_active_link page_info, :contents_of_type, :done}" do
+          i.fa.fa-check.fa-fw
+          = I18n.t("views.shared.navbar.done")
+      li.nav-item
+        = link_to filter_contents_path(:trash), class: "nav-link #{navbar_active_link page_info, :contents_of_type, :trash}" do
+          i.fa.fa-trash.fa-fw
+          = I18n.t("views.shared.navbar.trash")
+
+      //! Contents, filtered by source
+      li.nav-title = I18n.t("views.shared.navbar.filter_by_source")
+      - if current_user.sources.any?
+        - current_user.sources.each do |source|
+          li.nav-item
+            = link_to source_contents_path(source.id), class: "nav-link #{navbar_active_link page_info, :contents_of_source, source.id}" do
+              i.fa class=(uncolorized_iconable_source_type source.type)
+              = source.name
+      - else
         li.nav-item
-          = link_to source_contents_path(source.id), class: "nav-link #{content_link_active_class source_filter, source.id}" do
-            i.fa class=(uncolorized_iconable_source_type source.type)
-            = source.name
+          = I18n.t("views.shared.navbar.no_source")
 
       //! Sources
       li.nav-title = I18n.t("views.shared.navbar.sources")
       li.nav-item
-        = link_to sources_path, class: "nav-link #{yield :source_link_list_active}" do
+        = link_to sources_path, class: "nav-link #{navbar_active_link page_info, :sources, :all}" do
           i.fa.fa-list.fa-fw
           = I18n.t("views.shared.navbar.list_sources")
       li.nav-item
-        = link_to new_source_path, class: "nav-link #{yield :source_link_new_active}" do
+        = link_to new_source_path, class: "nav-link #{navbar_active_link page_info, :sources, :new}" do
           i.fa.fa-plus.fa-fw
           = I18n.t("views.shared.navbar.create_source")

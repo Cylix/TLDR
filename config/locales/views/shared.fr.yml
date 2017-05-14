@@ -4,6 +4,11 @@ fr:
       navbar:
         create_source: "Créer"
         contents: "Contenus"
+        done: "Terminés"
+        filter_by_source: "Filtrer par source"
         list_contents: "Toutes les contenus"
         list_sources: "Toutes les sources"
+        no_source: "Aucune source"
+        snoozed: "En attente"
         sources: "Sources de contenu"
+        trash: "Corbeille"

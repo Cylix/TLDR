@@ -1,26 +1,43 @@
-- content_for :current_source_filter, @source&.id
-
 h1
   - if @source
     = I18n.t("views.contents.index.contents_for_source", source_name: @source.name)
+    - content_for :page_info, raw({ page_type: :contents_of_source, extra: @source.id }.to_json)
+  - elsif @type
+    = @type.capitalize
+    - content_for :page_info, raw({ page_type: :contents_of_type, extra: @type.downcase }.to_json)
   - else
     = I18n.t("views.contents.index.all_contents")
+    - content_for :page_info, raw({ page_type: :contents, extra: :all }.to_json)
 
 - if @contents.any?
-  - @contents.each do |content|
-    .card
-      .card-block
-        h4.card-title = content.title
-        h6.card-subtitle.mb-2.text-muted
-          i.fa.fa-fw class=(iconable_source_type content.source.type)
-          = link_to content.source.name, edit_source_path(content.source), class: 'text-muted'
-        p.card-text = content.description.blank? ? I18n.t("views.contents.index.no_description") : trunk_words(sanitize(content.description, tags:[]), 150)
-        p.card-text = link_to I18n.t("views.contents.index.view_content"), content.url, target: '_blank'
-        p.card-text
-          - if content.published_at
-            small.text-muted = I18n.t('views.contents.index.pusblished_and_imported_at', published_at: time_ago_in_words(content.published_at), synchronized_at: time_ago_in_words(content.synchronized_at))
-          - else
-            small.text-muted = I18n.t('views.contents.index.imported_at', synchronized_at: time_ago_in_words(content.synchronized_at))
+  //! pinned post first
+  - [@pinned, @unpinned].each do |contents|
+    - contents.each do |content|
+      .card
+        .card-block
+          .row-no-margin
+            h4.card-title = content.title
+            .content-actions.ml-auto
+              = link_to '#' do
+                i.fa.fa-fw.fa-lg.fa-thumb-tack class=('text-info' if content.pinned?)
+              = link_to '#' do
+                i.fa.fa-fw.fa-lg.fa-check
+              = link_to '#' do
+                i.fa.fa-fw.fa-lg.fa-clock-o
+              = link_to '#' do
+                i.fa.fa-fw.fa-lg.fa-suitcase
+              = link_to '#' do
+                i.fa.fa-fw.fa-lg.fa-trash
+          h6.card-subtitle.mb-2.text-muted
+            i.fa.fa-fw class=(iconable_source_type content.source.type)
+            = link_to content.source.name, edit_source_path(content.source), class: 'text-muted'
+          p.card-text = content.description.blank? ? I18n.t("views.contents.index.no_description") : trunk_words(sanitize(content.description, tags:[]), 150)
+          p.card-text = link_to I18n.t("views.contents.index.view_content"), content.url, target: '_blank'
+          p.card-text
+            - if content.published_at
+              small.text-muted = I18n.t('views.contents.index.pusblished_and_imported_at', published_at: time_ago_in_words(content.published_at), synchronized_at: time_ago_in_words(content.synchronized_at))
+            - else
+              small.text-muted = I18n.t('views.contents.index.imported_at', synchronized_at: time_ago_in_words(content.synchronized_at))
 
 - else
   = I18n.t("views.contents.index.no_content")

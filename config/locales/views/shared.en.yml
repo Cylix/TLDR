@@ -4,6 +4,11 @@ en:
       navbar:
         create_source: "Create"
         contents: "Contents"
+        done: "Done"
+        filter_by_source: "Filter by source"
         list_contents: "All contents"
         list_sources: "All sources"
+        no_source: "No source"
+        snoozed: "Snoozed"
         sources: "Content sources"
+        trash: "Trash"

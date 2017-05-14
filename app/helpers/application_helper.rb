@@ -10,6 +10,15 @@ module ApplicationHelper
     resource&.errors&.full_messages
   end
 
+  # Return active if the current page has the expected type and extra
+  # Otherwise, return nil
+  def navbar_active_link(page_info, expected_page_type, expected_extra = nil)
+    page_info = JSON.parse(page_info)
+    'active' if page_info[:page_type] == expected_page_type && page_info[:extra] == expected_extra
+  rescue
+    nil
+  end
+
   # trunk text to first n words
   def trunk_words(str, nb_words)
     words = str.split(" ")

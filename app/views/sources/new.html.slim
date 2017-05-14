@@ -1,4 +1,4 @@
-- content_for :source_link_new_active, 'active'
+- content_for :page_info, raw({ page_type: :sources, extra: :new }.to_json)
 
 h1 = I18n.t("views.sources.new.create_new_source")
 

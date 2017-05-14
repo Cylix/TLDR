@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   # contents
   resources :contents, only: :index
   # contents filtering
+  ## By source
   get '/sources/:source_id/contents' => 'contents#index', as: :source_contents
+  ## Type (snoozed/done/trash)
+  get '/contents/:type' => 'contents#index', as: :filter_contents
 
 end

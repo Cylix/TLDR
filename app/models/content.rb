@@ -7,6 +7,7 @@ class Content < ApplicationRecord
   # validations
   validates :title,           presence: true
   validates :url,             presence: true
+  validates :pinned,          inclusion: { in: [true, false] }
   validates :synchronized_at, presence: true
   validate  :validates_url_format
 

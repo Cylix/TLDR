@@ -1,4 +1,4 @@
-- content_for :source_link_list_active, 'active'
+- content_for :page_info, raw({ page_type: :sources, extra: :all }.to_json)
 
 h1 = I18n.t("views.sources.index.sources")
 
