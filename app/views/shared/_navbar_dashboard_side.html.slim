@@ -5,9 +5,9 @@
       - page_info = yield :page_info
       li.nav-title = I18n.t("views.shared.navbar.contents")
       li.nav-item
-        = link_to contents_path, class: "nav-link #{navbar_active_link page_info, :contents, :all}" do
+        = link_to filter_contents_path(:inbox), class: "nav-link #{navbar_active_link page_info, :contents_of_type, :inbox}" do
           i.fa.fa-list.fa-fw
-          = I18n.t("views.shared.navbar.list_contents")
+          = I18n.t("views.shared.navbar.inbox")
       li.nav-item
         = link_to filter_contents_path(:snoozed), class: "nav-link #{navbar_active_link page_info, :contents_of_type, :snoozed}" do
           i.fa.fa-clock-o.fa-fw
@@ -17,7 +17,7 @@
           i.fa.fa-check.fa-fw
           = I18n.t("views.shared.navbar.done")
       li.nav-item
-        = link_to filter_contents_path(:trash), class: "nav-link #{navbar_active_link page_info, :contents_of_type, :trash}" do
+        = link_to filter_contents_path(:trashed), class: "nav-link #{navbar_active_link page_info, :contents_of_type, :trash}" do
           i.fa.fa-trash.fa-fw
           = I18n.t("views.shared.navbar.trash")
 

@@ -6,7 +6,7 @@ en:
         contents: "Contents"
         done: "Done"
         filter_by_source: "Filter by source"
-        list_contents: "All contents"
+        inbox: Inbox
         list_sources: "All sources"
         no_source: "No source"
         snoozed: "Snoozed"

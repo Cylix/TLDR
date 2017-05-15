@@ -1,0 +1,5 @@
+en:
+  controllers:
+    contents:
+      misc:
+        unable_to_find: The requested content does not exist or does not belong to you

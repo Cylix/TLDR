@@ -2,9 +2,9 @@ h1
   - if @source
     = I18n.t("views.contents.index.contents_for_source", source_name: @source.name)
     - content_for :page_info, raw({ page_type: :contents_of_source, extra: @source.id }.to_json)
-  - elsif @type
-    = @type.capitalize
-    - content_for :page_info, raw({ page_type: :contents_of_type, extra: @type.downcase }.to_json)
+  - elsif @category
+    = @category.capitalize
+    - content_for :page_info, raw({ page_type: :contents_of_type, extra: @category.downcase }.to_json)
   - else
     = I18n.t("views.contents.index.all_contents")
     - content_for :page_info, raw({ page_type: :contents, extra: :all }.to_json)
@@ -18,16 +18,21 @@ h1
           .row-no-margin
             h4.card-title = content.title
             .content-actions.ml-auto
-              = link_to '#' do
-                i.fa.fa-fw.fa-lg.fa-thumb-tack class=('text-info' if content.pinned?)
-              = link_to '#' do
-                i.fa.fa-fw.fa-lg.fa-check
-              = link_to '#' do
-                i.fa.fa-fw.fa-lg.fa-clock-o
+              //! pin
+              = link_to content_path(content, content: {is_pinned: !content.is_pinned}), remote: true, method: :put, class: 'pin_btn' do
+                i.fa.fa-fw.fa-lg.fa-thumb-tack class=('text-info' if content.is_pinned?)
+              //! done
+              = link_to content_path(content, content: { category: (content.is_done? ? :inbox : :done) }), remote: true, method: :put, class: 'done_btn' do
+                i.fa.fa-fw.fa-lg.fa-check class=('text-success' if content.is_done?)
+              //! snooze
+              = link_to '#', class: 'snooze_btn' do
+                i.fa.fa-fw.fa-lg.fa-clock-o class=('text-success' if content.is_snoozed?)
+              //! move to
               = link_to '#' do
                 i.fa.fa-fw.fa-lg.fa-suitcase
-              = link_to '#' do
-                i.fa.fa-fw.fa-lg.fa-trash
+              //! trash
+              = link_to content_path(content, content: { category: (content.is_trashed? ? :inbox : :trashed) }), remote: true, method: :put, class: 'trashed_btn' do
+                i.fa.fa-fw.fa-lg.fa-trash  class=('text-danger' if content.is_trashed?)
           h6.card-subtitle.mb-2.text-muted
             i.fa.fa-fw class=(iconable_source_type content.source.type)
             = link_to content.source.name, edit_source_path(content.source), class: 'text-muted'

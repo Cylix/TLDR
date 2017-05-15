@@ -9,11 +9,11 @@ Rails.application.routes.draw do
   resources :sources, except: :show
 
   # contents
-  resources :contents, only: :index
+  resources :contents, only: [:index, :update]
   # contents filtering
   ## By source
   get '/sources/:source_id/contents' => 'contents#index', as: :source_contents
-  ## Type (snoozed/done/trash)
-  get '/contents/:type' => 'contents#index', as: :filter_contents
+  ## Type (snoozed/done/trashed)
+  get '/contents/:category' => 'contents#index', as: :filter_contents
 
 end

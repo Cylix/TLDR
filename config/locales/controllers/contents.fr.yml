@@ -1,0 +1,5 @@
+fr:
+  controllers:
+    contents:
+      misc:
+        unable_to_find: Le contenu demandé n'existe pas ou ne vous appartient pas

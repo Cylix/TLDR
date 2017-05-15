@@ -6,7 +6,7 @@ fr:
         contents: "Contenus"
         done: "Terminés"
         filter_by_source: "Filtrer par source"
-        list_contents: "Toutes les contenus"
+        inbox: Boite de réception
         list_sources: "Toutes les sources"
         no_source: "Aucune source"
         snoozed: "En attente"
