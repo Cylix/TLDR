@@ -17,7 +17,7 @@ RSpec.describe ContentsController, type: :controller do
     describe 'unauthenticated' do
 
       it 'should not be permitted' do
-        get :index
+        get :index, params: {category: :inbox}
         expect(response.status).to eq 302
         expect(response).to redirect_to new_user_session_path
       end
@@ -29,13 +29,13 @@ RSpec.describe ContentsController, type: :controller do
       before(:each) { sign_in user_1 }
 
       it 'should work' do
-        get :index
+        get :index, params: {category: :inbox}
         expect(response.status).to eq 200
         expect(response).to render_template :index
       end
 
       it 'should list current_user contents' do
-        get :index
+        get :index, params: {category: :inbox}
         expect(assigns(:contents)).not_to be_nil
         expect(assigns(:contents).count).to eq 2
         expect(assigns(:contents)).to eq [content_2, content_1]

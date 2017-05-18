@@ -46,7 +46,7 @@ RSpec.feature "RootPath", type: :feature do
 
       it 'should redirect to contents page' do
         visit root_path
-        expect(current_path).to eq contents_path
+        expect(current_path).to eq filter_contents_path(:inbox)
       end
 
     end

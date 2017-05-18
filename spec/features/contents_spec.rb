@@ -43,7 +43,7 @@ RSpec.feature "Contents", type: :feature do
 
       it 'should work' do
         expect(page.status_code).to eq 200
-        expect(current_path).to eq contents_path
+        expect(current_path).to eq filter_contents_path(:inbox)
       end
 
       it 'should display the user source' do

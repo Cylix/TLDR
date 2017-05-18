@@ -350,7 +350,7 @@ RSpec.feature "Sources", type: :feature do
           visit edit_source_path source_2
 
           expect(page.status_code).to eq 200
-          expect(current_path).to eq contents_path
+          expect(current_path).to eq filter_contents_path(:inbox)
           expect(page).to have_content 'The requested source does not exist or does not belong to you'
         end
 
