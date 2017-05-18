@@ -35,6 +35,8 @@ class ContentsController < DashboardController
     else
       render json: { success: false, message: @content.errors.full_messages }, status: 400
     end
+  rescue ArgumentError => e
+    render json: { success: false, message: e.to_s }, status: 400
   end
 
   private
@@ -52,7 +54,7 @@ class ContentsController < DashboardController
     @content = current_user.contents.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     flash[:error] = I18n.t("controllers.contents.misc.unable_to_find")
-    redirect_to '/'
+    redirect_to root_path
   end
 
 end

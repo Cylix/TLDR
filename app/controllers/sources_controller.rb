@@ -79,7 +79,7 @@ class SourcesController < DashboardController
     @source = current_user.sources.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     flash[:error] = I18n.t("controllers.sources.misc.unable_to_find")
-    redirect_to '/'
+    redirect_to root_path
   end
 
 end

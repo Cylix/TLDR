@@ -7,6 +7,7 @@ FactoryGirl.define do
     published_at    Time.now
     synchronized_at Time.now
     is_pinned       false # leave false to avoid ordering issues during tests
+    category        :inbox # leave inbox to avoid filtering issues during tests
 
     association :user,   factory: :user,       strategy: :build
     association :source, factory: :rss_source, strategy: :build
@@ -19,6 +20,7 @@ FactoryGirl.define do
     published_at    Time.now
     synchronized_at Time.now
     is_pinned       false # leave false to avoid ordering issues during tests
+    category        :inbox # leave inbox to avoid filtering issues during tests
 
     # association :user,   factory: :user,       strategy: :build
     association :source, factory: :rss_source, strategy: :create
@@ -33,6 +35,7 @@ FactoryGirl.define do
     published_at    (Time.now - 1.day)
     synchronized_at (Time.now - 1.day)
     is_pinned       false # leave false to avoid ordering issues during tests
+    category        :inbox # leave inbox to avoid filtering issues during tests
 
     association :user,   factory: :user,       strategy: :build
     association :source, factory: :rss_source, strategy: :build
@@ -45,6 +48,7 @@ FactoryGirl.define do
     published_at    (Time.now - 2.day)
     synchronized_at (Time.now - 2.day)
     is_pinned       false # leave false to avoid ordering issues during tests
+    category        :inbox # leave inbox to avoid filtering issues during tests
 
     association :user,   factory: :user,       strategy: :build
     association :source, factory: :rss_source, strategy: :build
@@ -57,6 +61,7 @@ FactoryGirl.define do
     published_at    (Time.now - 1.day)
     synchronized_at (Time.now - 1.day)
     is_pinned       false # leave false to avoid ordering issues during tests
+    category        :inbox # leave inbox to avoid filtering issues during tests
 
     # association :user,   factory: :user,       strategy: :build
     association :source, factory: :rss_source, strategy: :create

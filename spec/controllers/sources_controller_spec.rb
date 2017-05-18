@@ -243,7 +243,7 @@ RSpec.describe SourcesController, type: :controller do
 
             before(:each) { source_edited.rss_feed = '' }
 
-            it 'should work' do
+            it 'should not work' do
               put :update, params: { id: source_3.id, source: source_edited.attributes }
               expect(response.status).to eq 400
               expect(response).to render_template :edit
