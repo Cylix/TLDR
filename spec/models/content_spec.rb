@@ -19,7 +19,133 @@ RSpec.describe Content, type: :model do
 
   end
 
+  describe 'utility functions' do
+
+    describe 'is_done?' do
+
+      it 'should return true if the category is done' do
+        content.category = :done
+        expect(content.is_done?).to be_truthy
+      end
+
+      it 'should return false if the category is trash' do
+        content.category = :trashed
+        expect(content.is_done?).to be_falsey
+      end
+
+      it 'should return false if the category is snooze' do
+        content.category = :snoozed
+        expect(content.is_done?).to be_falsey
+      end
+
+    end
+
+    describe 'is_snoozed?' do
+
+      it 'should return false if the category is done' do
+        content.category = :done
+        expect(content.is_snoozed?).to be_falsey
+      end
+
+      it 'should return false if the category is trash' do
+        content.category = :trashed
+        expect(content.is_snoozed?).to be_falsey
+      end
+
+      it 'should return true if the category is snooze' do
+        content.category = :snoozed
+        expect(content.is_snoozed?).to be_truthy
+      end
+
+    end
+
+    describe 'is_trashed?' do
+
+      it 'should return false if the category is done' do
+        content.category = :done
+        expect(content.is_trashed?).to be_falsey
+      end
+
+      it 'should return true if the category is trash' do
+        content.category = :trashed
+        expect(content.is_trashed?).to be_truthy
+      end
+
+      it 'should return false if the category is snooze' do
+        content.category = :snoozed
+        expect(content.is_trashed?).to be_falsey
+      end
+
+    end
+
+  end
+
   describe 'validations' do
+
+    describe 'is_pinned' do
+
+      describe 'inclusion [true, false]' do
+
+        it 'must be a valid boolean value (convert all values to bool)' do
+          content.is_pinned = "hello"
+          expect(content.valid?).to be_truthy
+          expect(content.is_pinned).to eq true
+        end
+
+      end
+
+      describe 'presence' do
+
+        it "can't be empty" do
+          content.is_pinned = ""
+          expect(content.valid?).to be_falsey
+        end
+
+        it "can't be nil" do
+          content.is_pinned = nil
+          expect(content.valid?).to be_falsey
+        end
+
+        it "can't be blank (converted to bool)" do
+          content.is_pinned = "         "
+          expect(content.valid?).to be_truthy
+          expect(content.is_pinned).to eq true
+        end
+
+      end
+
+    end
+
+    describe 'category' do
+
+      describe 'inclusion [VALID CATEGORIES]' do
+
+        it 'must be a valid category' do
+          expect { content.category = "hello" }.to raise_error ArgumentError
+        end
+
+      end
+
+      describe 'presence' do
+
+        it "can't be empty" do
+          content.category = ""
+          expect(content.valid?).to be_falsey
+        end
+
+        it "can't be nil" do
+          content.category = nil
+          expect(content.valid?).to be_falsey
+        end
+
+        it "can't be blank" do
+          content.category = "         "
+          expect(content.valid?).to be_falsey
+        end
+
+      end
+
+    end
 
     describe 'synchronized_at' do
 

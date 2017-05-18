@@ -11,7 +11,7 @@ class Content < ApplicationRecord
   # validations
   validates :title,           presence: true
   validates :url,             presence: true
-  validates :is_pinned,       inclusion: { in: [true, false] }
+  validates :is_pinned,       inclusion: { in: [true, false] }, allow_nil: false
   validates :synchronized_at, presence: true
   validates :category,        inclusion: { in: CATEGORY_VALUES.map(&:to_s) }
   validate  :validates_url_format

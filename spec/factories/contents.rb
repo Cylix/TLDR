@@ -6,6 +6,7 @@ FactoryGirl.define do
     url             "http://some.url/to/the/content"
     published_at    Time.now
     synchronized_at Time.now
+    is_pinned       false # leave false to avoid ordering issues during tests
 
     association :user,   factory: :user,       strategy: :build
     association :source, factory: :rss_source, strategy: :build
@@ -17,6 +18,7 @@ FactoryGirl.define do
     url             "http://some.url/to/the/content"
     published_at    Time.now
     synchronized_at Time.now
+    is_pinned       false # leave false to avoid ordering issues during tests
 
     # association :user,   factory: :user,       strategy: :build
     association :source, factory: :rss_source, strategy: :create
@@ -30,6 +32,7 @@ FactoryGirl.define do
     url             "http://some.url/to/the/content/edited"
     published_at    (Time.now - 1.day)
     synchronized_at (Time.now - 1.day)
+    is_pinned       false # leave false to avoid ordering issues during tests
 
     association :user,   factory: :user,       strategy: :build
     association :source, factory: :rss_source, strategy: :build
@@ -41,6 +44,7 @@ FactoryGirl.define do
     url             "http://some.url/to/the/content/with/another/edit"
     published_at    (Time.now - 2.day)
     synchronized_at (Time.now - 2.day)
+    is_pinned       false # leave false to avoid ordering issues during tests
 
     association :user,   factory: :user,       strategy: :build
     association :source, factory: :rss_source, strategy: :build
@@ -52,6 +56,7 @@ FactoryGirl.define do
     url             "http://some.url/to/the/content/edited"
     published_at    (Time.now - 1.day)
     synchronized_at (Time.now - 1.day)
+    is_pinned       false # leave false to avoid ordering issues during tests
 
     # association :user,   factory: :user,       strategy: :build
     association :source, factory: :rss_source, strategy: :create
