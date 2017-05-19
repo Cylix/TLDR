@@ -14,7 +14,7 @@ module ApplicationHelper
   # Otherwise, return nil
   def navbar_active_link(page_info, expected_page_type, expected_extra = nil)
     page_info = JSON.parse(page_info)
-    'active' if page_info[:page_type] == expected_page_type && page_info[:extra] == expected_extra
+    'active' if page_info["page_type"].to_s == expected_page_type.to_s && page_info["extra"].to_s == expected_extra.to_s
   rescue
     nil
   end

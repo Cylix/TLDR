@@ -49,6 +49,87 @@ RSpec.feature "ApplicationHelper", type: :feature do
 
   end
 
+  describe 'navbar_active_link' do
+
+    describe 'with match' do
+
+      context 'with sym & sym' do
+
+        it 'should return active' do
+          expect(ApplicationHelper::navbar_active_link({page_type: :contents, extra: :inbox}.to_json, :contents, :inbox)).to eq 'active'
+        end
+
+      end
+
+      context 'with sym & string' do
+
+        it 'should return active' do
+          expect(ApplicationHelper::navbar_active_link({page_type: :contents, extra: :inbox}.to_json, "contents", "inbox")).to eq 'active'
+        end
+
+      end
+
+      context 'with string & sym' do
+
+        it 'should return active' do
+          expect(ApplicationHelper::navbar_active_link({"page_type" => "contents", "extra" => "inbox"}.to_json, :contents, :inbox)).to eq 'active'
+        end
+
+      end
+
+      context 'with int & int' do
+
+        it 'should return active' do
+          expect(ApplicationHelper::navbar_active_link({page_type: :contents, extra: 1}.to_json, :contents, 1)).to eq 'active'
+        end
+
+      end
+
+      context 'with int & string' do
+
+        it 'should return active' do
+          expect(ApplicationHelper::navbar_active_link({page_type: :contents, extra: 1}.to_json, :contents, "1")).to eq 'active'
+        end
+
+      end
+
+      context 'with nil extra' do
+
+        it 'should return active' do
+          expect(ApplicationHelper::navbar_active_link({page_type: :contents}.to_json, :contents)).to eq 'active'
+        end
+
+      end
+
+    end
+
+    describe 'with different type' do
+
+      it 'should return nil' do
+        expect(ApplicationHelper::navbar_active_link({page_type: :contents, extra: :inbox}.to_json, :contents_different, :inbox)).to eq nil
+      end
+
+    end
+
+    describe 'with different extra' do
+
+      it 'should return nil' do
+        expect(ApplicationHelper::navbar_active_link({page_type: :contents, extra: :inbox}.to_json, :contents, :inbox_different)).to eq nil
+      end
+
+
+    end
+
+    describe 'with exception' do
+
+      it 'should return nil' do
+        expect(ApplicationHelper::navbar_active_link("lol", :contents, :inbox_different)).to eq nil
+      end
+
+    end
+
+  end
+
   describe 'trunk_words' do
 
     context 'with right number of words' do
