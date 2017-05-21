@@ -285,6 +285,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.0)
   rails-controller-testing
+  rspec-mocks
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   simplecov

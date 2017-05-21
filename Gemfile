@@ -41,6 +41,7 @@ group :development, :test do
   gem 'capistrano-rvm'
   gem 'factory_girl_rails'
   gem 'rails-controller-testing'
+  gem 'rspec-mocks'
   gem 'rspec-rails', '~> 3.5'
   gem 'simplecov', require: false
 end
