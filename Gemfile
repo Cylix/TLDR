@@ -34,7 +34,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'capybara', branch: :master
+  gem 'capybara'#, branch: :master
   gem 'capistrano', '~> 3.6'
   gem 'capistrano-passenger'
   gem 'capistrano-rails', '~> 1.2'
