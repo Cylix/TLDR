@@ -34,7 +34,7 @@ class Source < ApplicationRecord
   # Return the synchronizer associated to that source
   # Must be implemented by child classes
   def synchronizer
-    raise "No synchronizer defined for source type '#{self.to_s}'"
+    raise "No synchronizer defined for source type '#{self.class.to_s}'"
   end
 
   # returns the list of fields specific to this particular type of source

@@ -17,8 +17,8 @@ class Synchronizer
                     description:    content.description,
                     url:            content.url,
                     published_at:   content.published_at, # mightor might not be wise: updates? delete/repost?
-                    source_id:      content.source.id,
-                    user_id:        content.user.id
+                    source_id:      content.source_id,
+                    user_id:        content.user_id
   end
 
 end

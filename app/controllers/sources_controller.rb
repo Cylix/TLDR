@@ -30,7 +30,7 @@ class SourcesController < DashboardController
   rescue ActiveRecord::SubclassNotFound
     @source = Source.new sources_params.merge type: nil
     flash.now[:error] = I18n.t("controllers.sources.create.unrecognized_source_type")
-    render 'new' and return
+    render 'new', status: 400 and return
   end
 
   # GET /sources/{id}

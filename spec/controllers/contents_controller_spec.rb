@@ -218,11 +218,37 @@ RSpec.describe ContentsController, type: :controller do
 
         end
 
-        describe 'with invalid data' do
+        describe 'with invalid data (throwing exception)' do
 
           let(:invalid_update_params) do
             params = update_params
             params[:content]["category"] = "yolo"
+            params
+          end
+
+          it 'should not work' do
+            put :update, params: {id: content_1.id}.merge(invalid_update_params)
+            expect(response.status).to eq 400
+            expect(response.header['Content-Type']).to include 'application/json'
+
+            parsed = JSON.parse(response.body)
+            expect(parsed["success"]).to be_falsey
+            expect(parsed["message"]).not_to be_nil
+          end
+
+          it 'should not udpate the requested resource' do
+            expect {
+              put :update, params: {id: content_1.id}.merge(invalid_update_params)
+            }.not_to change{ source_1.reload }
+          end
+
+        end
+
+        describe 'with invalid data (valid? is false)' do
+
+          let(:invalid_update_params) do
+            params = update_params
+            params[:content]["is_pinned"] = nil
             params
           end
 

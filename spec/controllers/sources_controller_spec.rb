@@ -134,6 +134,25 @@ RSpec.describe SourcesController, type: :controller do
 
       end
 
+      describe 'with invalid type' do
+
+        before(:each) { new_source.type = 'yolo' }
+
+        it 'should work' do
+          post :create, params: { source: new_source.attributes }
+          expect(response.status).to eq 400
+          expect(response).to render_template :new
+          expect(flash[:error]).not_to be_nil
+        end
+
+        it 'should not create a new source' do
+          expect {
+            post :create, params: { source: new_source.attributes }
+          }.not_to change{ Source.count }
+        end
+
+      end
+
     end
 
   end
@@ -285,6 +304,25 @@ RSpec.describe SourcesController, type: :controller do
         describe 'with invalid data' do
 
           before(:each) { new_source.name = '' }
+
+          it 'should work' do
+            put :update, params: { id: source_1.id, source: new_source.attributes }
+            expect(response.status).to eq 400
+            expect(response).to render_template :edit
+            expect(flash[:resource_errors]).not_to be_nil
+          end
+
+          it 'should not udpate the requested resource' do
+            expect {
+              put :update, params: { id: source_1.id, source: new_source.attributes }
+            }.not_to change{ source_1.reload }
+          end
+
+        end
+
+        describe 'with invalid type' do
+
+          before(:each) { new_source.type = 'yolo' }
 
           it 'should work' do
             put :update, params: { id: source_1.id, source: new_source.attributes }

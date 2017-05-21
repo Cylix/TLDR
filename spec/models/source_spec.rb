@@ -212,4 +212,20 @@ RSpec.describe Source, type: :model do
 
   end
 
+  describe 'synchronizer' do
+
+    it 'should raise an exception' do
+      expect{ Source.new.synchronizer }.to raise_error "No synchronizer defined for source type 'Source'"
+    end
+
+  end
+
+  describe 'type_specific_fields' do
+
+    it 'should return empty array' do
+      expect(Source.type_specific_fields).to eq []
+    end
+
+  end
+
 end

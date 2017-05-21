@@ -75,4 +75,13 @@ RSpec.feature "Contents", type: :feature do
 
   end
 
+  describe 'pin' do
+  end
+
+  describe 'trash' do
+  end
+
+  describe 'done' do
+  end
+
 end
