@@ -76,12 +76,331 @@ RSpec.feature "Contents", type: :feature do
   end
 
   describe 'pin' do
+
+    before(:each) { login_as user_1, scope: :user }
+
+    let!(:source_1) { create(:rss_source, user: user_1) }
+
+    let!(:content_1) { create(:content, user: user_1, source: source_1, title: 'CONTENT_1') }
+    let!(:content_2) { create(:content_edited, user: user_1, source: source_1, title: 'CONTENT_2') }
+
+    describe 'order' do
+
+      context 'before' do
+
+        it 'should order created_at DESC' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_content /CONTENT_2.*CONTENT_1/
+        end
+
+      end
+
+      context 'after' do
+
+        before do
+          visit filter_contents_path(:inbox)
+          all('a.pin_btn').last.click
+        end
+
+        it 'should show pin first' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_content /CONTENT_1.*CONTENT_2/
+        end
+
+      end
+
+    end
+
+    describe 'pin' do
+
+      context 'before' do
+
+        it 'should have 2 pinned item in inbox' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_selector('a.pin_btn i', count: 2) # nb items
+          expect(page).to have_selector('a.pin_btn i.text-info', count: 0) # nb pinned
+        end
+
+      end
+
+      context 'after' do
+
+        before(:each) do
+          visit filter_contents_path(:inbox)
+          first('a.pin_btn').click
+        end
+
+        it 'should have 1 pinned item' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_selector('a.pin_btn i', count: 2) # nb items
+          expect(page).to have_selector('a.pin_btn i.text-info', count: 1) # nb pinned
+        end
+
+        it 'should update the content is DB' do
+          expect(content_1.reload.is_pinned).to eq false
+          expect(content_2.reload.is_pinned).to eq true
+        end
+
+      end
+
+      end
+
+      describe 'unpin' do
+
+      before(:each) do
+        visit filter_contents_path(:inbox)
+        first('a.pin_btn').click
+      end
+
+      context 'before' do
+
+        it 'should have 1 undone item' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_selector('a.pin_btn i', count: 2) # nb items
+          expect(page).to have_selector('a.pin_btn i.text-info', count: 1) # nb pinned
+        end
+
+      end
+
+      context 'after' do
+
+        before(:each) do
+          visit filter_contents_path(:inbox)
+          first('a.pin_btn').click
+        end
+
+        it 'should have 2 untrashed item in inbox' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_selector('a.pin_btn i', count: 2) # nb items
+          expect(page).to have_selector('a.pin_btn i.text-info', count: 0) # nb pinned
+        end
+
+      end
+
+    end
+
   end
 
   describe 'trash' do
+
+    before(:each) { login_as user_1, scope: :user }
+
+    let!(:source_1) { create(:rss_source, user: user_1) }
+
+    let!(:content_1) { create(:content, user: user_1, source: source_1, title: 'CONTENT_1') }
+    let!(:content_2) { create(:content_edited, user: user_1, source: source_1, title: 'CONTENT_2') }
+
+    describe 'trash' do
+
+      context 'before' do
+
+        it 'should have 2 untrashed item in inbox' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_selector('a.trashed_btn i', count: 2) # nb items
+          expect(page).to have_selector('a.trashed_btn i.text-danger', count: 0) # nb trashed
+          expect(page).to have_content('CONTENT_1')
+          expect(page).to have_content('CONTENT_2')
+        end
+
+        it 'should have no trashed item in trash' do
+          visit filter_contents_path(:trashed)
+          expect(page).to have_selector('a.trashed_btn i', count: 0) # nb items
+          expect(page).to have_selector('a.trashed_btn i.text-danger', count: 0) # nb trashed
+        end
+
+      end
+
+      context 'after' do
+
+        before(:each) do
+          visit filter_contents_path(:inbox)
+          first('a.trashed_btn').click
+        end
+
+        it 'should have 1 untrashed item in inbox' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_selector('a.trashed_btn i', count: 1) # nb items
+          expect(page).to have_selector('a.trashed_btn i.text-danger', count: 0) # nb trashed
+          expect(page).to have_content('CONTENT_1')
+        end
+
+        it 'should have 1 trashed item in trash' do
+          visit filter_contents_path(:trashed)
+          expect(page).to have_selector('a.trashed_btn i', count: 1) # nb items
+          expect(page).to have_selector('a.trashed_btn i.text-danger', count: 1) # nb trashed
+          expect(page).to have_content('CONTENT_2')
+        end
+
+        it 'should update the content is DB' do
+          expect(content_1.reload.category).to eq "inbox"
+          expect(content_2.reload.category).to eq "trashed"
+        end
+
+      end
+
+    end
+
+    describe 'untrash' do
+
+      before(:each) do
+        visit filter_contents_path(:inbox)
+        first('a.trashed_btn').click
+      end
+
+      context 'before' do
+
+        it 'should have 1 untrashed item in inbox' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_selector('a.trashed_btn i', count: 1) # nb items
+          expect(page).to have_selector('a.trashed_btn i.text-danger', count: 0) # nb trashed
+          expect(page).to have_content('CONTENT_1')
+        end
+
+        it 'should have 1 trashed item in trash' do
+          visit filter_contents_path(:trashed)
+          expect(page).to have_selector('a.trashed_btn i', count: 1) # nb items
+          expect(page).to have_selector('a.trashed_btn i.text-danger', count: 1) # nb trashed
+          expect(page).to have_content('CONTENT_2')
+        end
+
+      end
+
+      context 'after' do
+
+        before(:each) do
+          visit filter_contents_path(:trashed)
+          first('a.trashed_btn').click
+        end
+
+        it 'should have 2 untrashed item in inbox' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_selector('a.trashed_btn i', count: 2) # nb items
+          expect(page).to have_selector('a.trashed_btn i.text-danger', count: 0) # nb trashed
+          expect(page).to have_content('CONTENT_1')
+          expect(page).to have_content('CONTENT_2')
+        end
+
+        it 'should have no trashed item in trash' do
+          visit filter_contents_path(:trashed)
+          expect(page).to have_selector('a.trashed_btn i', count: 0) # nb items
+          expect(page).to have_selector('a.trashed_btn i.text-danger', count: 0) # nb trashed
+        end
+
+      end
+
+    end
+
   end
 
   describe 'done' do
+
+    before(:each) { login_as user_1, scope: :user }
+
+    let!(:source_1) { create(:rss_source, user: user_1) }
+
+    let!(:content_1) { create(:content, user: user_1, source: source_1, title: 'CONTENT_1') }
+    let!(:content_2) { create(:content_edited, user: user_1, source: source_1, title: 'CONTENT_2') }
+
+    describe 'done' do
+
+      context 'before' do
+
+        it 'should have 2 undone item in inbox' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_selector('a.done_btn i', count: 2) # nb items
+          expect(page).to have_selector('a.done_btn i.text-success', count: 0) # nb done
+          expect(page).to have_content('CONTENT_1')
+          expect(page).to have_content('CONTENT_2')
+        end
+
+        it 'should have no done item in done' do
+          visit filter_contents_path(:done)
+          expect(page).to have_selector('a.done_btn i', count: 0) # nb items
+          expect(page).to have_selector('a.done_btn i.text-success', count: 0) # nb done
+        end
+
+      end
+
+      context 'after' do
+
+        before(:each) do
+          visit filter_contents_path(:inbox)
+          first('a.done_btn').click
+        end
+
+        it 'should have 1 undone item in inbox' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_selector('a.done_btn i', count: 1) # nb items
+          expect(page).to have_selector('a.done_btn i.text-success', count: 0) # nb done
+          expect(page).to have_content('CONTENT_1')
+        end
+
+        it 'should have 1 done item in done' do
+          visit filter_contents_path(:done)
+          expect(page).to have_selector('a.done_btn i', count: 1) # nb items
+          expect(page).to have_selector('a.done_btn i.text-success', count: 1) # nb done
+          expect(page).to have_content('CONTENT_2')
+        end
+
+        it 'should update the content is DB' do
+          expect(content_1.reload.category).to eq "inbox"
+          expect(content_2.reload.category).to eq "done"
+        end
+
+      end
+
+    end
+
+    describe 'undone' do
+
+      before(:each) do
+        visit filter_contents_path(:inbox)
+        first('a.done_btn').click
+      end
+
+      context 'before' do
+
+        it 'should have 1 undone item in inbox' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_selector('a.done_btn i', count: 1) # nb items
+          expect(page).to have_selector('a.done_btn i.text-success', count: 0) # nb done
+          expect(page).to have_content('CONTENT_1')
+        end
+
+        it 'should have 1 done item in done' do
+          visit filter_contents_path(:done)
+          expect(page).to have_selector('a.done_btn i', count: 1) # nb items
+          expect(page).to have_selector('a.done_btn i.text-success', count: 1) # nb done
+          expect(page).to have_content('CONTENT_2')
+        end
+
+      end
+
+      context 'after' do
+
+        before(:each) do
+          visit filter_contents_path(:done)
+          first('a.done_btn').click
+        end
+
+        it 'should have 2 untrashed item in inbox' do
+          visit filter_contents_path(:inbox)
+          expect(page).to have_selector('a.done_btn i', count: 2) # nb items
+          expect(page).to have_selector('a.done_btn i.text-success', count: 0) # nb done
+          expect(page).to have_content('CONTENT_1')
+          expect(page).to have_content('CONTENT_2')
+        end
+
+        it 'should have no done item in done' do
+          visit filter_contents_path(:done)
+          expect(page).to have_selector('a.done_btn i', count: 0) # nb items
+          expect(page).to have_selector('a.done_btn i.text-success', count: 0) # nb done
+        end
+
+      end
+
+    end
+
   end
 
 end
