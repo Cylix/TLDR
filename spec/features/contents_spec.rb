@@ -403,4 +403,126 @@ RSpec.feature "Contents", type: :feature do
 
   end
 
+  describe 'filters' do
+
+    let(:user_2) { create(:user_edited) }
+
+    let!(:source_1) { create(:rss_source, user: user_1) }
+    let!(:source_2) { create(:rss_source, user: user_2) }
+    let!(:source_3) { create(:rss_source, user: user_1) }
+
+    let!(:content_1) { create(:content, user: user_1, source: source_1, title: "CONTENT_1") }
+    let!(:content_2) { create(:content_edited, user: user_1, source: source_3, is_pinned: true, title: "CONTENT_2") }
+    let!(:content_3) { create(:content_edited_2, user: user_2, source: source_2, title: "CONTENT_3") }
+    let!(:content_4) { create(:content_edited_2, user: user_1, source: source_1, category: :snoozed, title: "CONTENT_4") }
+    let!(:content_5) { create(:content_edited, user: user_1, source: source_3, category: :done, title: "CONTENT_5") }
+    let!(:content_6) { create(:content_edited, user: user_1, source: source_3, category: :trashed, title: "CONTENT_6") }
+
+    before (:each) do
+      login_as user_1, scope: :user
+      visit filter_contents_path(:inbox)
+    end
+
+    # USER 1
+    #  content_1    source_1      unpinned      inbox
+    #  content_2    source_3      pinned        inbox
+    #  content_4    source_1      unpinned      snoozed
+    #  content_5    source_3      unpinned      done
+    #  content_6    source_3      unpinned      trashed
+    #
+    # USER 2
+    #  content_3    source_2      unpinned      inbox
+
+    it 'should provide filtering options' do
+      expect(page).to have_link "Inbox"
+      expect(page).to have_link "Snoozed"
+      expect(page).to have_link "Done"
+      expect(page).to have_link "Trash"
+      expect(page).to have_link source_1.name
+      expect(page).to have_link source_3.name
+    end
+
+    describe 'categories' do
+
+      describe 'inbox' do
+
+        it 'should list the right content' do
+          click_link("Inbox")
+
+          expect(page).to have_content(content_1.title)
+          expect(page).to have_content(content_2.title)
+          expect(page).not_to have_content(content_3.title)
+          expect(page).not_to have_content(content_4.title)
+          expect(page).not_to have_content(content_5.title)
+          expect(page).not_to have_content(content_6.title)
+        end
+
+      end
+
+      describe 'snoozed' do
+
+        it 'should list the right content' do
+          click_link("Snoozed")
+
+          expect(page).not_to have_content(content_1.title)
+          expect(page).not_to have_content(content_2.title)
+          expect(page).not_to have_content(content_3.title)
+          expect(page).to have_content(content_4.title)
+          expect(page).not_to have_content(content_5.title)
+          expect(page).not_to have_content(content_6.title)
+        end
+
+      end
+
+      describe 'done' do
+
+        it 'should list the right content' do
+          click_link("Done")
+
+          expect(page).not_to have_content(content_1.title)
+          expect(page).not_to have_content(content_2.title)
+          expect(page).not_to have_content(content_3.title)
+          expect(page).not_to have_content(content_4.title)
+          expect(page).to have_content(content_5.title)
+          expect(page).not_to have_content(content_6.title)
+        end
+
+      end
+
+      describe 'trashed' do
+
+        it 'should list the right content' do
+          click_link("Trash")
+
+          expect(page).not_to have_content(content_1.title)
+          expect(page).not_to have_content(content_2.title)
+          expect(page).not_to have_content(content_3.title)
+          expect(page).not_to have_content(content_4.title)
+          expect(page).not_to have_content(content_5.title)
+          expect(page).to have_content(content_6.title)
+        end
+
+      end
+
+    end
+
+    describe 'sources' do
+
+      it 'should filter the right content' do
+        # Use visit instead of click
+        # There are multiple link and it is a pain in the ass to filter it...
+        visit source_contents_path(source_1.id)
+
+        expect(page).to have_content(content_1.title)
+        expect(page).not_to have_content(content_2.title)
+        expect(page).not_to have_content(content_3.title)
+        expect(page).to have_content(content_4.title)
+        expect(page).not_to have_content(content_5.title)
+        expect(page).not_to have_content(content_6.title)
+      end
+
+    end
+
+  end
+
 end
