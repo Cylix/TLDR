@@ -11,38 +11,37 @@ h1
 
 - if @contents.any?
   //! pinned post first
-  - [@pinned, @unpinned].each do |contents|
-    - contents.each do |content|
-      .card
-        .card-block
-          .row-no-margin
-            h4.card-title = content.title
-            .content-actions.ml-auto
-              //! pin
-              = link_to content_path(content, content: {is_pinned: !content.is_pinned}), remote: true, method: :put, class: 'pin_btn' do
-                i.fa.fa-fw.fa-lg.fa-thumb-tack class=('text-info' if content.is_pinned?)
-              //! done
-              = link_to content_path(content, content: { category: (content.is_done? ? :inbox : :done) }), remote: true, method: :put, class: 'done_btn' do
-                i.fa.fa-fw.fa-lg.fa-check class=('text-success' if content.is_done?)
-              //! snooze
-              = link_to '#', class: 'snooze_btn' do
-                i.fa.fa-fw.fa-lg.fa-clock-o class=('text-success' if content.is_snoozed?)
-              //! move to
-              = link_to '#' do
-                i.fa.fa-fw.fa-lg.fa-suitcase
-              //! trash
-              = link_to content_path(content, content: { category: (content.is_trashed? ? :inbox : :trashed) }), remote: true, method: :put, class: 'trashed_btn' do
-                i.fa.fa-fw.fa-lg.fa-trash  class=('text-danger' if content.is_trashed?)
-          h6.card-subtitle.mb-2.text-muted
-            i.fa.fa-fw class=(iconable_source_type content.source.type)
-            = link_to content.source.name, edit_source_path(content.source), class: 'text-muted'
-          p.card-text = content.description.blank? ? I18n.t("views.contents.index.no_description") : trunk_words(sanitize(content.description, tags:[]), 150)
-          p.card-text = link_to I18n.t("views.contents.index.view_content"), content.url, target: '_blank'
-          p.card-text
-            - if content.published_at
-              small.text-muted = I18n.t('views.contents.index.pusblished_and_imported_at', published_at: time_ago_in_words(content.published_at), synchronized_at: time_ago_in_words(content.synchronized_at))
-            - else
-              small.text-muted = I18n.t('views.contents.index.imported_at', synchronized_at: time_ago_in_words(content.synchronized_at))
+  - @contents.each do |content|
+    .card class=(class_for_content_card content)
+      .card-block
+        .row-no-margin
+          h4.card-title = content.title
+          .content-actions.ml-auto
+            //! pin
+            = link_to content_path(content, content: {is_pinned: !content.is_pinned}), remote: true, method: :put, class: 'pin_btn' do
+              i.fa.fa-fw.fa-lg.fa-thumb-tack class=('text-info' if content.is_pinned?)
+            //! done
+            = link_to content_path(content, content: { category: (content.is_done? ? :inbox : :done) }), remote: true, method: :put, class: 'done_btn' do
+              i.fa.fa-fw.fa-lg.fa-check class=('text-success' if content.is_done?)
+            //! snooze
+            = link_to '#', class: 'snooze_btn' do
+              i.fa.fa-fw.fa-lg.fa-clock-o class=('text-success' if content.is_snoozed?)
+            //! move to
+            = link_to '#' do
+              i.fa.fa-fw.fa-lg.fa-suitcase
+            //! trash
+            = link_to content_path(content, content: { category: (content.is_trashed? ? :inbox : :trashed) }), remote: true, method: :put, class: 'trashed_btn' do
+              i.fa.fa-fw.fa-lg.fa-trash  class=('text-danger' if content.is_trashed?)
+        h6.card-subtitle.mb-2.text-muted
+          i.fa.fa-fw class=(iconable_source_type content.source.type)
+          = link_to content.source.name, edit_source_path(content.source), class: 'text-muted'
+        p.card-text = content.description.blank? ? I18n.t("views.contents.index.no_description") : trunk_words(sanitize(content.description, tags:[]), 150)
+        p.card-text = link_to I18n.t("views.contents.index.view_content"), content.url, target: '_blank'
+        p.card-text
+          - if content.published_at
+            small.text-muted = I18n.t('views.contents.index.pusblished_and_imported_at', published_at: time_ago_in_words(content.published_at), synchronized_at: time_ago_in_words(content.synchronized_at))
+          - else
+            small.text-muted = I18n.t('views.contents.index.imported_at', synchronized_at: time_ago_in_words(content.synchronized_at))
 
 - else
   = I18n.t("views.contents.index.no_content")

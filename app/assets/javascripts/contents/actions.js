@@ -20,9 +20,11 @@ $(document).on('turbolinks:load', function () {
       card.find('.pin_btn i').toggleClass('text-info', data.content.is_pinned);
 
       if (data.content.is_pinned)
-        $(this).attr('href', $(this).attr('href').replace(/true/g, 'false'))
+        $(this).attr('href', $(this).attr('href').replace(/true/g, 'false'));
       else
-        $(this).attr('href', $(this).attr('href').replace(/false/g, 'true'))
+        $(this).attr('href', $(this).attr('href').replace(/false/g, 'true'));
+
+      card.toggleClass('pinned', data.content.is_pinned);
     })
     .bind('ajax:error', function(evt, data, status, xhr) {
     });
@@ -48,5 +50,13 @@ $(document).on('turbolinks:load', function () {
     })
     .bind('ajax:error', function(evt, data, status, xhr) {
     });
+
+  var togglePinContents = function (showOnlyPin) {
+    $('.card.content').not('.pinned').toggle(!showOnlyPin);
+  }
+
+  $('.switch input').on('change', function () {
+    togglePinContents($(this).is(':checked'))
+  })
 
 });

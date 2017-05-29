@@ -21,10 +21,6 @@ class ContentsController < DashboardController
     @contents = @contents.where(source_id: @source.id) if @source
     @contents = @contents.where(category: @category) if @category
     @contents = @contents.where.not(category: :trashed) unless @category == 'trashed'
-
-    partition = @contents.partition { |c| c.is_pinned? }
-    @pinned   = partition.first
-    @unpinned = partition.last
   end
 
   # PUT/PATCH /contents/:id
