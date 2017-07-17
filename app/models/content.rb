@@ -1,8 +1,8 @@
 class Content < ApplicationRecord
 
-  # Enum values for category
-  CATEGORY_VALUES = [:inbox, :snoozed, :done, :trashed]
-  enum category: CATEGORY_VALUES
+  # Enum values for status
+  STATUS_VALUES = [:inbox, :snoozed, :done, :trashed]
+  enum status: STATUS_VALUES
 
   # associations
   belongs_to :user
@@ -13,7 +13,7 @@ class Content < ApplicationRecord
   validates :url,             presence: true
   validates :is_pinned,       inclusion: { in: [true, false] }, allow_nil: false
   validates :synchronized_at, presence: true
-  validates :category,        inclusion: { in: CATEGORY_VALUES.map(&:to_s) }
+  validates :status,        inclusion: { in: STATUS_VALUES.map(&:to_s) }
   validate  :validates_url_format
 
   # association validations
@@ -27,17 +27,17 @@ class Content < ApplicationRecord
 
   # is content done?
   def is_done?
-    self.category.to_sym == :done
+    self.status.to_sym == :done
   end
 
   # is content snoozed?
   def is_snoozed?
-    self.category.to_sym == :snoozed
+    self.status.to_sym == :snoozed
   end
 
   # is content trashed?
   def is_trashed?
-    self.category.to_sym == :trashed
+    self.status.to_sym == :trashed
   end
 
   # validates url format

@@ -9,18 +9,18 @@ class ContentsController < DashboardController
     if params[:source_id]
       # Ensure source to have valid id and belongs to user (null otherwise)
       @source = current_user.sources.find_by_id(params[:source_id])
-    elsif params[:category]
-      # ensure category is valid (null otherwise)
-      @category = (Content::CATEGORY_VALUES.map(&:to_s) & [params[:category]]).first
+    elsif params[:status]
+      # ensure status is valid (null otherwise)
+      @status = (Content::STATUS_VALUES.map(&:to_s) & [params[:status]]).first
     end
 
-    # If no source nor category, redirect to inbox
-    redirect_to filter_contents_path(:inbox) and return if !@source && !@category
+    # If no source nor status, redirect to inbox
+    redirect_to filter_contents_path(:inbox) and return if !@source && !@status
 
     @contents = current_user.contents
     @contents = @contents.where(source_id: @source.id) if @source
-    @contents = @contents.where(category: @category) if @category
-    @contents = @contents.where.not(category: :trashed) unless @category == 'trashed'
+    @contents = @contents.where(status: @status) if @status
+    @contents = @contents.where.not(status: :trashed) unless @status == 'trashed'
   end
 
   # PUT/PATCH /contents/:id
@@ -40,7 +40,7 @@ class ContentsController < DashboardController
 
   # allowed params
   def content_params
-    params.require(:content).permit(:is_pinned, :category)
+    params.require(:content).permit(:is_pinned, :status)
   end
 
   # find the content for the id paramater

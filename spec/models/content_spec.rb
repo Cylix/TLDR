@@ -23,18 +23,18 @@ RSpec.describe Content, type: :model do
 
     describe 'is_done?' do
 
-      it 'should return true if the category is done' do
-        content.category = :done
+      it 'should return true if the status is done' do
+        content.status = :done
         expect(content.is_done?).to be_truthy
       end
 
-      it 'should return false if the category is trash' do
-        content.category = :trashed
+      it 'should return false if the status is trash' do
+        content.status = :trashed
         expect(content.is_done?).to be_falsey
       end
 
-      it 'should return false if the category is snooze' do
-        content.category = :snoozed
+      it 'should return false if the status is snooze' do
+        content.status = :snoozed
         expect(content.is_done?).to be_falsey
       end
 
@@ -42,18 +42,18 @@ RSpec.describe Content, type: :model do
 
     describe 'is_snoozed?' do
 
-      it 'should return false if the category is done' do
-        content.category = :done
+      it 'should return false if the status is done' do
+        content.status = :done
         expect(content.is_snoozed?).to be_falsey
       end
 
-      it 'should return false if the category is trash' do
-        content.category = :trashed
+      it 'should return false if the status is trash' do
+        content.status = :trashed
         expect(content.is_snoozed?).to be_falsey
       end
 
-      it 'should return true if the category is snooze' do
-        content.category = :snoozed
+      it 'should return true if the status is snooze' do
+        content.status = :snoozed
         expect(content.is_snoozed?).to be_truthy
       end
 
@@ -61,18 +61,18 @@ RSpec.describe Content, type: :model do
 
     describe 'is_trashed?' do
 
-      it 'should return false if the category is done' do
-        content.category = :done
+      it 'should return false if the status is done' do
+        content.status = :done
         expect(content.is_trashed?).to be_falsey
       end
 
-      it 'should return true if the category is trash' do
-        content.category = :trashed
+      it 'should return true if the status is trash' do
+        content.status = :trashed
         expect(content.is_trashed?).to be_truthy
       end
 
-      it 'should return false if the category is snooze' do
-        content.category = :snoozed
+      it 'should return false if the status is snooze' do
+        content.status = :snoozed
         expect(content.is_trashed?).to be_falsey
       end
 
@@ -116,12 +116,12 @@ RSpec.describe Content, type: :model do
 
     end
 
-    describe 'category' do
+    describe 'status' do
 
       describe 'inclusion [VALID CATEGORIES]' do
 
-        it 'must be a valid category' do
-          expect { content.category = "hello" }.to raise_error ArgumentError
+        it 'must be a valid status' do
+          expect { content.status = "hello" }.to raise_error ArgumentError
         end
 
       end
@@ -129,17 +129,17 @@ RSpec.describe Content, type: :model do
       describe 'presence' do
 
         it "can't be empty" do
-          content.category = ""
+          content.status = ""
           expect(content.valid?).to be_falsey
         end
 
         it "can't be nil" do
-          content.category = nil
+          content.status = nil
           expect(content.valid?).to be_falsey
         end
 
         it "can't be blank" do
-          content.category = "         "
+          content.status = "         "
           expect(content.valid?).to be_falsey
         end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515014828) do
+ActiveRecord::Schema.define(version: 20170717003614) do
 
   create_table "contents", force: :cascade do |t|
     t.string   "title",           default: "",                    null: false
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170515014828) do
     t.datetime "published_at"
     t.datetime "synchronized_at", default: '2017-04-18 07:07:49', null: false
     t.boolean  "is_pinned",       default: false,                 null: false
-    t.integer  "category",        default: 0,                     null: false
+    t.integer  "status",          default: 0,                     null: false
   end
 
   create_table "sources", force: :cascade do |t|

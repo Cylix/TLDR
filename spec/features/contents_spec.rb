@@ -205,8 +205,8 @@ RSpec.feature "Contents", type: :feature do
         end
 
         it 'should update the content is DB' do
-          expect(content_1.reload.category).to eq "inbox"
-          expect(content_2.reload.category).to eq "trashed"
+          expect(content_1.reload.status).to eq "inbox"
+          expect(content_2.reload.status).to eq "trashed"
         end
 
       end
@@ -316,8 +316,8 @@ RSpec.feature "Contents", type: :feature do
         end
 
         it 'should update the content is DB' do
-          expect(content_1.reload.category).to eq "inbox"
-          expect(content_2.reload.category).to eq "done"
+          expect(content_1.reload.status).to eq "inbox"
+          expect(content_2.reload.status).to eq "done"
         end
 
       end
@@ -387,9 +387,9 @@ RSpec.feature "Contents", type: :feature do
     let!(:content_1) { create(:content, user: user_1, source: source_1, title: "CONTENT_1") }
     let!(:content_2) { create(:content_edited, user: user_1, source: source_3, is_pinned: true, title: "CONTENT_2") }
     let!(:content_3) { create(:content_edited_2, user: user_2, source: source_2, title: "CONTENT_3") }
-    let!(:content_4) { create(:content_edited_2, user: user_1, source: source_1, category: :snoozed, title: "CONTENT_4") }
-    let!(:content_5) { create(:content_edited, user: user_1, source: source_3, category: :done, title: "CONTENT_5") }
-    let!(:content_6) { create(:content_edited, user: user_1, source: source_3, category: :trashed, title: "CONTENT_6") }
+    let!(:content_4) { create(:content_edited_2, user: user_1, source: source_1, status: :snoozed, title: "CONTENT_4") }
+    let!(:content_5) { create(:content_edited, user: user_1, source: source_3, status: :done, title: "CONTENT_5") }
+    let!(:content_6) { create(:content_edited, user: user_1, source: source_3, status: :trashed, title: "CONTENT_6") }
 
     before (:each) do
       login_as user_1, scope: :user

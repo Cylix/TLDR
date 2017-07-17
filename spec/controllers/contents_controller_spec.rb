@@ -12,7 +12,7 @@ RSpec.describe ContentsController, type: :controller do
   let!(:content_1) { create(:content, user: user_1, source: source_1) }
   let!(:content_2) { create(:content_edited, user: user_1, source: source_3, is_pinned: true) }
   let!(:content_3) { create(:content_edited_2, user: user_2, source: source_2) }
-  let!(:content_4) { create(:content_edited_2, user: user_1, source: source_1, category: :snoozed) }
+  let!(:content_4) { create(:content_edited_2, user: user_1, source: source_1, status: :snoozed) }
 
   # USER 1
   #  content_1    source_1      unpinned      inbox
@@ -27,7 +27,7 @@ RSpec.describe ContentsController, type: :controller do
     describe 'unauthenticated' do
 
       it 'should not be permitted' do
-        get :index, params: {category: :inbox}
+        get :index, params: {status: :inbox}
         expect(response.status).to eq 302
         expect(response).to redirect_to new_user_session_path
       end
@@ -39,13 +39,13 @@ RSpec.describe ContentsController, type: :controller do
       before(:each) { sign_in user_1 }
 
       it 'should work' do
-        get :index, params: {category: :inbox}
+        get :index, params: {status: :inbox}
         expect(response.status).to eq 200
         expect(response).to render_template :index
       end
 
       it 'should list current_user contents' do
-        get :index, params: {category: :inbox}
+        get :index, params: {status: :inbox}
         expect(assigns(:contents)).not_to be_nil
         expect(assigns(:contents).count).to eq 2
         expect(assigns(:contents)).to eq [content_2, content_1]
@@ -92,12 +92,12 @@ RSpec.describe ContentsController, type: :controller do
 
       end
 
-      describe 'category filtering' do
+      describe 'status filtering' do
 
-        describe 'with a valid category' do
+        describe 'with a valid status' do
 
-          it 'should list the sources of the given category' do
-            get :index, params: {category: :snoozed}
+          it 'should list the sources of the given status' do
+            get :index, params: {status: :snoozed}
             expect(assigns(:contents)).not_to be_nil
             expect(assigns(:contents).count).to eq 1
             expect(assigns(:contents)).to eq [content_4]
@@ -105,10 +105,10 @@ RSpec.describe ContentsController, type: :controller do
 
         end
 
-        describe 'with an invalid category' do
+        describe 'with an invalid status' do
 
           it 'should redirect to the inbox page' do
-            get :index, params: {category: :yolo}
+            get :index, params: {status: :yolo}
             expect(response.status).to eq 302
             expect(response).to redirect_to filter_contents_path(:inbox)
           end
@@ -142,10 +142,10 @@ RSpec.describe ContentsController, type: :controller do
   describe 'update' do
 
     let!(:source_for_edit) { create(:rss_source, user: user_1) }
-    let!(:edited_content) { create(:content_edited, user: user_1, source: source_for_edit, is_pinned: !content_1.is_pinned, category: :trashed) }
+    let!(:edited_content) { create(:content_edited, user: user_1, source: source_for_edit, is_pinned: !content_1.is_pinned, status: :trashed) }
 
     def update_params
-      { content: edited_content.attributes.slice("title", "description", "url", "published_at", "synchronized_at", "is_pinned", "category") }
+      { content: edited_content.attributes.slice("title", "description", "url", "published_at", "synchronized_at", "is_pinned", "status") }
     end
 
     describe 'unauthenticated' do
@@ -188,7 +188,7 @@ RSpec.describe ContentsController, type: :controller do
 
             # Authorized
             expect(content.is_pinned).to  eq edited_content.is_pinned
-            expect(content.category).to   eq edited_content.category
+            expect(content.status).to   eq edited_content.status
 
             # Unauthorized
             expect(content.title).not_to            eq edited_content.title
@@ -204,7 +204,7 @@ RSpec.describe ContentsController, type: :controller do
 
           let(:invalid_update_params) do
             params = update_params
-            params[:content]["category"] = "yolo"
+            params[:content]["status"] = "yolo"
             params
           end
 

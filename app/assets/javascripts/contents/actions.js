@@ -32,9 +32,9 @@ $(document).on('turbolinks:load', function () {
   $('.done_btn')
     .bind('ajax:success', function(evt, data, status, xhr) {
       var card = get_content_card($(this));
-      card.find('.done_btn i').toggleClass('text-success', data.content.category == 'done');
-      card.find('.snooze_btn i').toggleClass('text-warning', data.content.category == 'snoozed');
-      card.find('.trashed_btn i').toggleClass('text-danger', data.content.category == 'trashed');
+      card.find('.done_btn i').toggleClass('text-success', data.content.status == 'done');
+      card.find('.snooze_btn i').toggleClass('text-warning', data.content.status == 'snoozed');
+      card.find('.trashed_btn i').toggleClass('text-danger', data.content.status == 'trashed');
       card.fadeOut(800, function() { card.remove() });
     })
     .bind('ajax:error', function(evt, data, status, xhr) {
@@ -43,9 +43,9 @@ $(document).on('turbolinks:load', function () {
   $('.trashed_btn')
     .bind('ajax:success', function(evt, data, status, xhr) {
       var card = get_content_card($(this));
-      card.find('.done_btn i').toggleClass('text-success', data.content.category == 'done');
-      card.find('.snooze_btn i').toggleClass('text-warning', data.content.category == 'snoozed');
-      card.find('.trashed_btn i').toggleClass('text-danger', data.content.category == 'trashed');
+      card.find('.done_btn i').toggleClass('text-success', data.content.status == 'done');
+      card.find('.snooze_btn i').toggleClass('text-warning', data.content.status == 'snoozed');
+      card.find('.trashed_btn i').toggleClass('text-danger', data.content.status == 'trashed');
       card.fadeOut(800, function() { card.remove() });
     })
     .bind('ajax:error', function(evt, data, status, xhr) {
