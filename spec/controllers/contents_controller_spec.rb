@@ -137,24 +137,6 @@ RSpec.describe ContentsController, type: :controller do
 
     end
 
-    describe 'pinned' do
-
-      before(:each) { sign_in user_1 }
-
-      it 'should split pin and unpin' do
-        get :index, params: {category: :inbox}
-
-        expect(assigns(:pinned)).not_to be_nil
-        expect(assigns(:pinned).count).to eq 1
-        expect(assigns(:pinned)).to eq [content_2]
-
-        expect(assigns(:unpinned)).not_to be_nil
-        expect(assigns(:unpinned).count).to eq 1
-        expect(assigns(:unpinned)).to eq [content_1]
-      end
-
-    end
-
   end
 
   describe 'update' do

@@ -84,33 +84,6 @@ RSpec.feature "Contents", type: :feature do
     let!(:content_1) { create(:content, user: user_1, source: source_1, title: 'CONTENT_1') }
     let!(:content_2) { create(:content_edited, user: user_1, source: source_1, title: 'CONTENT_2') }
 
-    describe 'order' do
-
-      context 'before' do
-
-        it 'should order created_at DESC' do
-          visit filter_contents_path(:inbox)
-          expect(page).to have_content /CONTENT_2.*CONTENT_1/
-        end
-
-      end
-
-      context 'after' do
-
-        before do
-          visit filter_contents_path(:inbox)
-          all('a.pin_btn').last.click
-        end
-
-        it 'should show pin first' do
-          visit filter_contents_path(:inbox)
-          expect(page).to have_content /CONTENT_1.*CONTENT_2/
-        end
-
-      end
-
-    end
-
     describe 'pin' do
 
       context 'before' do
