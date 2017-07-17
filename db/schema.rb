@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717003614) do
+ActiveRecord::Schema.define(version: 20170717004026) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       default: "", null: false
+    t.integer  "user_id",    default: 0,  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "contents", force: :cascade do |t|
     t.string   "title",           default: "",                    null: false
@@ -24,6 +31,7 @@ ActiveRecord::Schema.define(version: 20170717003614) do
     t.datetime "synchronized_at", default: '2017-04-18 07:07:49', null: false
     t.boolean  "is_pinned",       default: false,                 null: false
     t.integer  "status",          default: 0,                     null: false
+    t.integer  "category_id"
   end
 
   create_table "sources", force: :cascade do |t|

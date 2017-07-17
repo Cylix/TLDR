@@ -197,6 +197,39 @@ RSpec.describe User, type: :model do
 
     end
 
+    describe 'contents' do
+
+      describe 'dependent destroy' do
+
+        let!(:source) { create(:rss_source, user: user) }
+        let!(:content) { create(:content, user: user, source: source) }
+
+        it "should destroy the user contents when user is destroy" do
+          expect(Content.count).to eq 1
+          user.destroy!
+          expect(Content.count).to eq 0
+        end
+
+      end
+
+    end
+
+    describe 'categories' do
+
+      describe 'dependent destroy' do
+
+        let!(:category) { create(:category, user: user) }
+
+        it "should destroy the user categories when user is destroy" do
+          expect(Category.count).to eq 1
+          user.destroy!
+          expect(Category.count).to eq 0
+        end
+
+      end
+
+    end
+
   end
 
 end

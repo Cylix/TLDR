@@ -7,13 +7,14 @@ class Content < ApplicationRecord
   # associations
   belongs_to :user
   belongs_to :source
+  belongs_to :category, optional: true
 
   # validations
   validates :title,           presence: true
   validates :url,             presence: true
   validates :is_pinned,       inclusion: { in: [true, false] }, allow_nil: false
   validates :synchronized_at, presence: true
-  validates :status,        inclusion: { in: STATUS_VALUES.map(&:to_s) }
+  validates :status,          inclusion: { in: STATUS_VALUES.map(&:to_s) }
   validate  :validates_url_format
 
   # association validations

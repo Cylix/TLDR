@@ -306,6 +306,21 @@ RSpec.describe Content, type: :model do
 
     end
 
+    describe 'category' do
+
+      let(:category) { create(:category, user: content.user) }
+
+      describe 'optional' do
+
+        it 'can have no category' do
+          content.category = nil
+          expect(content.valid?).to be_truthy
+        end
+
+      end
+
+    end
+
   end
 
 end
