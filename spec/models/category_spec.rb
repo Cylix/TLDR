@@ -24,6 +24,34 @@ RSpec.describe Category, type: :model do
 
     describe 'name' do
 
+      describe 'uniqueness' do
+
+        context 'same user' do
+
+          let!(:category_1) { create(:category, name: "abc", user: user) }
+          let!(:category_2) { build(:category, name: "abc", user: user) }
+
+          it 'cant have two categories with same name' do
+            expect(category_2.valid?).to be_falsey
+          end
+
+        end
+
+        context 'different users' do
+
+          let(:other_user) { create(:user_edited) }
+
+          let!(:category_1) { create(:category, name: "abc", user: user) }
+          let!(:category_2) { build(:category, name: "abc", user: other_user) }
+
+          it 'cant have two categories with same name' do
+            expect(category_2.valid?).to be_truthy
+          end
+
+        end
+
+      end
+
       describe 'presence' do
 
         it "can't be empty" do

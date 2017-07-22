@@ -2,13 +2,16 @@ en:
   views:
     shared:
       navbar:
+        create_category: "Create"
         create_source: "Create"
         contents: "Contents"
         done: "Done"
+        filter_by_category: "Filter by category"
         filter_by_source: "Filter by source"
         inbox: Inbox
         list_sources: "All sources"
         no_source: "No source"
+        no_category: "No category"
         snoozed: "Snoozed"
         sources: "Content sources"
         trash: "Trash"

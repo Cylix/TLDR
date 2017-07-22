@@ -1,0 +1,6 @@
+en:
+  views:
+    categories:
+      form:
+        create: Create
+        create_new_category: Create a new category

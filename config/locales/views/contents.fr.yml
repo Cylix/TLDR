@@ -3,6 +3,7 @@ fr:
     contents:
       index:
         all_contents: Tous les contenus
+        contents_for_category: Contenus pour la catégorie %{category_name}
         contents_for_source: Contenus pour la source %{source_name}
         imported_at: Importé il y a %{synchronized_at}
         no_description: Aucune description

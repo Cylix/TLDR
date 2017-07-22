@@ -1,0 +1,23 @@
+.modal.fade#categories_form_modal
+  .modal-dialog role="document"
+    .modal-content
+
+      = form_for Category.new, remote: true do |f|
+
+        //! Header
+        .modal-header
+          h5.modal-title = I18n.t("views.categories.form.create_new_category")
+          button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            span aria-hidden="true" &times;
+
+        //! body
+        .modal-body
+          .field.form-group
+            .input-group
+              span.input-group-addon
+                i.fa.fa-tag.fa-fw
+              = f.text_field :name, class: 'form-control', placeholder: I18n.t("activerecord.attributes.category.name")
+
+        //! footer
+        .modal-footer
+          = f.submit I18n.t("views.categories.form.create"), class: 'btn btn-primary'

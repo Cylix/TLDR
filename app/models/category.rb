@@ -6,6 +6,7 @@ class Category < ApplicationRecord
 
   # validations
   validates :name, presence: true
+  validates :name, uniqueness: {scope: :user_id}
 
   # association validations
   validates_presence_of :user

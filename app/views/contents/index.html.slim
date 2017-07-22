@@ -5,6 +5,9 @@ h1
   - elsif @status
     = @status.capitalize
     - content_for :page_info, raw({ page_type: :contents_of_type, extra: @status.downcase }.to_json)
+  - elsif @category
+    = I18n.t("views.contents.index.contents_for_category", category_name: @category.name)
+    - content_for :page_info, raw({ page_type: :contents_of_category, extra: @category.id }.to_json)
   - else
     = I18n.t("views.contents.index.all_contents")
     - content_for :page_info, raw({ page_type: :contents, extra: :all }.to_json)

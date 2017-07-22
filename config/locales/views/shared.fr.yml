@@ -2,12 +2,15 @@ fr:
   views:
     shared:
       navbar:
+        create_category: "Créer"
         create_source: "Créer"
         contents: "Contenus"
         done: "Terminés"
+        filter_by_category: "Filtrer par catégorie"
         filter_by_source: "Filtrer par source"
         inbox: Boite de réception
         list_sources: "Toutes les sources"
+        no_category: "Aucune catégorie"
         no_source: "Aucune source"
         snoozed: "En attente"
         sources: "Sources de contenu"

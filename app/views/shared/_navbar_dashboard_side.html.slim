@@ -21,6 +21,23 @@
           i.fa.fa-trash.fa-fw
           = I18n.t("views.shared.navbar.trash")
 
+      //! Categories
+      li.nav-title = I18n.t("views.shared.navbar.filter_by_category")
+      #categories
+        - if current_user.categories.any?
+            - current_user.categories.each do |category|
+              li.nav-item
+                 = link_to category_contents_path(category.id), class: "nav-link #{navbar_active_link page_info, :contents_of_category, category.id}" do
+                  i.fa.fa-tag
+                  = category.name
+        - else
+          li.nav-item#empty_category
+              span.nav-link = I18n.t("views.shared.navbar.no_category")
+      li.nav-item
+        = link_to '#', class: "nav-link", id: "create_category", 'data-toggle' => "modal", 'data-target' => "#categories_form_modal" do
+          i.fa.fa-plus.fa-fw
+          = I18n.t("views.shared.navbar.create_category")
+
       //! Contents, filtered by source
       li.nav-title = I18n.t("views.shared.navbar.filter_by_source")
       - if current_user.sources.any?
@@ -31,7 +48,7 @@
               = source.name
       - else
         li.nav-item
-          = I18n.t("views.shared.navbar.no_source")
+          span.nav-link = I18n.t("views.shared.navbar.no_source")
 
       //! Sources
       li.nav-title = I18n.t("views.shared.navbar.sources")

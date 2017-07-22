@@ -8,9 +8,14 @@ Rails.application.routes.draw do
   # sources
   resources :sources, except: :show
 
+  # categories
+  resources :categories, only: :create
+
   # contents
   resources :contents, only: [:index, :update]
   # contents filtering
+  ## By category
+  get '/categories/:category_id/contents' => 'contents#index', as: :category_contents
   ## By source
   get '/sources/:source_id/contents' => 'contents#index', as: :source_contents
   ## Type (snoozed/done/trashed)

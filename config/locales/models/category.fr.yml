@@ -1,0 +1,7 @@
+fr:
+  activerecord:
+    models:
+      category: "Categorie"
+    attributes:
+      category:
+        name: "Label"
