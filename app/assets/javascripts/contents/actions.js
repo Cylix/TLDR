@@ -5,8 +5,8 @@ $(document).on('turbolinks:load', function () {
             <div class='alert alert-" + color + "' role='alert'>\
               <button class='close' type='button' data-dismiss='alert' aria-label='Close'>\
                 <span aria-hidden='true'>&times;</span>\
-                " + msg + "\
               </button>\
+              " + msg + "\
             </div>");
   };
 
@@ -49,6 +49,24 @@ $(document).on('turbolinks:load', function () {
       card.fadeOut(800, function() { card.remove() });
     })
     .bind('ajax:error', function(evt, data, status, xhr) {
+    });
+
+  $('.categorize_btn')
+    .bind('ajax:success', function(evt, data, status, xhr) {
+      $(this).parents('.dropdown.show').removeClass('show');
+      $(this).parents('.dropdown').find('i').addClass('text-success');
+      $(this).parents('.dropdown').find('.category_name').text(data.category.name);
+      $(this).parents('.card').find('.category_link').html("\
+        <i class='fa fa-fw fa-tag'></i>\
+        <a class='text-muted' href='/categories/" + data.category.id + "/contents'>\
+          " + data.category.name + "\
+        </a>\
+      ");
+    })
+    .bind('ajax:error', function(evt, data, status, xhr) {
+      for (i = 0; i < data.responseJSON['message'].length; i += 1) {
+        display_alert(data.responseJSON['message'][i], 'danger');
+      }
     });
 
   var togglePinContents = function (showOnlyPin) {

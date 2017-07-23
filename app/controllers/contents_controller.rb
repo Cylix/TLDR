@@ -31,7 +31,7 @@ class ContentsController < DashboardController
   # Update content
   def update
     if @content.update_attributes content_params
-      render json: { success: true, content: @content }, status: 200
+      render json: { success: true, content: @content, category: @content.category }, status: 200
     else
       render json: { success: false, message: @content.errors.full_messages }, status: 400
     end
@@ -43,7 +43,7 @@ class ContentsController < DashboardController
 
   # allowed params
   def content_params
-    params.require(:content).permit(:is_pinned, :status)
+    params.require(:content).permit(:category_id, :is_pinned, :status)
   end
 
   # find the content for the id paramater

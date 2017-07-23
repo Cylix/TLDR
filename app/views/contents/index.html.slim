@@ -29,15 +29,31 @@ h1
             //! snooze
             = link_to '#', class: 'snooze_btn' do
               i.fa.fa-fw.fa-lg.fa-clock-o class=('text-success' if content.is_snoozed?)
-            //! move to
-            = link_to '#' do
-              i.fa.fa-fw.fa-lg.fa-suitcase
+            //! categorize
+            span.dropdown
+              = link_to '#', class: 'dropdown-toggle', id: "dropdown_categorize_#{content.id}", 'data-toggle' => "dropdown", 'aria-haspopup' => "true", 'aria-expanded' => "false" do
+                i.fa.fa-fw.fa-lg.fa-tag class=('text-success' if content.is_categorized?)
+                span.category_name
+                  - if content.is_categorized?
+                    = content.category.name
+              .dropdown-menu.dropdown-menu-right aria-labelledby="dropdown_categorize_#{content.id}"
+                h6.dropdown-header = I18n.t('views.contents.index.categorize')
+                .categories_dropdown
+                  - if current_user.categories.any?
+                    - current_user.categories.all.each do |category|
+                      = link_to category.name, content_path(content, content: { category_id: category.id }), remote: true, method: :put, class: 'dropdown-item categorize_btn'
+                  - else
+                    span.dropdown-item.empty_category = I18n.t('views.contents.index.no_category')
             //! trash
             = link_to content_path(content, content: { status: (content.is_trashed? ? :inbox : :trashed) }), remote: true, method: :put, class: 'trashed_btn' do
               i.fa.fa-fw.fa-lg.fa-trash  class=('text-danger' if content.is_trashed?)
         h6.card-subtitle.mb-2.text-muted
           i.fa.fa-fw class=(iconable_source_type content.source.type)
-          = link_to content.source.name, edit_source_path(content.source), class: 'text-muted'
+          = link_to content.source.name, source_contents_path(content.source), class: 'text-muted'
+        h6.card-subtitle.mb-2.text-muted.category_link
+          - if content.is_categorized?
+            i.fa.fa-fw.fa-tag
+            = link_to content.category.name, category_contents_path(content.category), class: 'text-muted'
         p.card-text = content.description.blank? ? I18n.t("views.contents.index.no_description") : trunk_words(sanitize(content.description, tags:[]), 150)
         p.card-text = link_to I18n.t("views.contents.index.view_content"), content.url, target: '_blank'
         p.card-text

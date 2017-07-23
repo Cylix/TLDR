@@ -3,10 +3,12 @@ fr:
     contents:
       index:
         all_contents: Tous les contenus
+        categorize: Categorize
         contents_for_category: Contenus pour la catégorie %{category_name}
         contents_for_source: Contenus pour la source %{source_name}
         imported_at: Importé il y a %{synchronized_at}
-        no_description: Aucune description
+        no_category: Aucune catégorie
         no_content: Aucun contenu
+        no_description: Aucune description
         pusblished_and_imported_at: Publié il y a %{published_at} ago, importé il y a %{synchronized_at} ago
         view_content: Voir le contenu

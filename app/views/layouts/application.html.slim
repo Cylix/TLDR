@@ -19,5 +19,5 @@ html
       .main.vcenter
         .container-fluid
           .animated.fadeIn
-            #flash_messages = render 'shared/flash_messages'
+            #flash_messages.col-md-4.offset-md-4 = render 'shared/flash_messages'
             == yield

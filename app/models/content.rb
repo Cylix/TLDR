@@ -16,6 +16,7 @@ class Content < ApplicationRecord
   validates :synchronized_at, presence: true
   validates :status,          inclusion: { in: STATUS_VALUES.map(&:to_s) }
   validate  :validates_url_format
+  validate  :validates_user_category
 
   # association validations
   validates_presence_of :user
@@ -25,6 +26,16 @@ class Content < ApplicationRecord
 
   # default scope
   default_scope { order(created_at: :desc) }
+
+  # is content categorized
+  def is_categorized?
+    self.category.present?
+  end
+
+  # is content categorized in given category
+  def is_categorized_in?(category)
+    self.category_id == category.id
+  end
 
   # is content done?
   def is_done?
@@ -44,6 +55,11 @@ class Content < ApplicationRecord
   # validates url format
   def validates_url_format
     errors.add(:url, :invalid) unless URLHelper::valid_url?(url)
+  end
+
+  # validates that the category belongs to the user
+  def validates_user_category
+    errors.add(:category, :invalid) if self.category_id.present? && !self.user.categories.collect { |c| c.id }.include?(self.category_id)
   end
 
 end

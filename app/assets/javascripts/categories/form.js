@@ -49,23 +49,23 @@ $(document).on('turbolinks:load', function () {
     }
   }
 
-  //! success
-  $('#new_category').on('ajax:success', function (e, data, status, xhr) {
-    display_category(data.category);
-    $('#categories_form_modal').modal('hide')
-  });
+  $('#new_category')
+    //! success
+    .bind('ajax:success', function (e, data, status, xhr) {
+      display_category(data.category);
+      $('#categories_form_modal').modal('hide')
+    })
+    //! failure
+    .bind('ajax:error', function (e, data, status, xhr) {
+      for (i = 0; i < data.responseJSON['message'].length; i += 1) {
+        //! skip user is invalid error
+        if (data.responseJSON['message'][i].indexOf("invalid") != -1) {
+          continue ;
+        }
 
-  //! failure
-  $('#new_category').on('ajax:error', function (e, data, status, xhr) {
-    for (i = 0; i < data.responseJSON['message'].length; i += 1) {
-      //! skip user is invalid error
-      if (data.responseJSON['message'][i].indexOf("invalid") != -1) {
-        continue ;
+        display_alert(data.responseJSON['message'][i], 'danger');
       }
-
-      display_alert(data.responseJSON['message'][i], 'danger');
-    }
-  });
+    });
 
   //! on modal opened
   $('#categories_form_modal').on('show.bs.modal', function (e) {
