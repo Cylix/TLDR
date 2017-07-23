@@ -22,3 +22,8 @@ class Synchronizer
   end
 
 end
+
+require 'synchronizer/facebook'
+require 'synchronizer/rss'
+require 'synchronizer/twitter'
+require 'synchronizer/youtube'
