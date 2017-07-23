@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 5.minutes do
-  runner 'ImportContentJob.perform_later'
+  runner "ImportContentJob.new.perform"
 end

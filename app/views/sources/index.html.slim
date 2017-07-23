@@ -20,7 +20,7 @@ h1 = I18n.t("views.sources.index.sources")
                   = printable_synchronization_state source.synchronization_state
                 br
                 small.text-muted
-                  - if source.last_synchronized_at = Time.now
+                  - if source.last_synchronized_at
                     = I18n.t('views.sources.index.last_synchronized_at', last_synchronized_at: time_ago_in_words(source.last_synchronized_at))
                   - else
                     = I18n.t('views.sources.index.never_synchronized')
